@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Plano da Andressa · Basic Fit Terneuzen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-dark: #085041;
+    --green-mid: #0F6E56;
+    --teal-accent: #5DCAA5;
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --surface2: #F5F4F0;
+    --border: rgba(0,0,0,0.08);
+    --border-med: rgba(0,0,0,0.14);
+    --text: #1A1A18;
+    --text2: #5F5E5A;
+    --text3: #888780;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 3rem;
+  }
+
+  /* ── HEADER ── */
+  .app-header {
+    background: var(--surface);
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.5rem 1.25rem 1.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-inner { display: flex; align-items: center; gap: 12px; }
+  .header-logo {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .header-text h1 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; }
+  .header-text p { font-size: 12px; color: var(--text3); margin-top: 1px; }
+  .header-tag {
+    margin-left: auto;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ── VIEWS ── */
+  .view { display: none; padding: 1.25rem; }
+  .view.active { display: block; }
+
+  /* ── NAV TABS (bottom) ── */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100%; max-width: 480px;
+    background: var(--surface);
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    z-index: 20;
+  }
+  .nav-btn {
+    flex: 1;
+    padding: 10px 0 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    color: var(--text3);
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    transition: color 0.15s;
+  }
+  .nav-btn.active { color: var(--green); }
+  .nav-icon { font-size: 18px; line-height: 1; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* ── CONFIGURAÇÃO ── */
+  .form-group { margin-bottom: 1.25rem; }
+  .form-label { font-size: 13px; color: var(--text2); margin-bottom: 8px; display: block; }
+  .form-label strong { color: var(--text); font-weight: 500; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 7px 16px;
+    border-radius: 24px;
+    border: 0.5px solid var(--border-med);
+    font-size: 13px;
+    cursor: pointer;
+    background: var(--surface);
+    color: var(--text2);
+    transition: all 0.15s;
+    user-select: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .chip.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+
+  .slider-wrap { display: flex; align-items: center; gap: 12px; }
+  input[type=range] {
+    flex: 1; -webkit-appearance: none; height: 4px;
+    background: var(--border-med); border-radius: 4px; outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--green);
+    cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .slider-val { font-size: 14px; font-weight: 500; color: var(--green); min-width: 56px; text-align: right; }
+
+  select {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border-med);
+    background: var(--surface);
+    color: var(--text);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 15px;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    letter-spacing: 0.01em;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+
+  .btn-secondary {
+    background: none;
+    border: 0.5px solid var(--border-med);
+    border-radius: var(--radius-sm);
+    padding: 9px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text2);
+    margin-bottom: 1.25rem;
+    transition: background 0.15s;
+  }
+  .btn-secondary:active { background: var(--surface2); }
+
+  /* ── PLANO ── */
+  .plan-tip {
+    background: var(--green-light);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .plan-tip-label { font-size: 10px; font-weight: 500; color: var(--green-mid); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .plan-tip p { font-size: 13px; color: var(--green-dark); line-height: 1.55; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 1.25rem; }
+  .stat-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.875rem 0.5rem;
+    text-align: center;
+  }
+  .stat-val { font-size: 22px; font-weight: 500; color: var(--green); line-height: 1; }
+  .stat-lbl { font-size: 10px; color: var(--text3); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .week-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .week-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; font-style: italic; }
+  .week-badge { font-size: 11px; background: var(--green-light); color: var(--green-mid); padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+  /* Day Cards */
+  .day-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .day-card:active { box-shadow: var(--shadow-card); }
+
+  .day-header {
+    display: flex; align-items: center;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    gap: 12px;
+  }
+  .day-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--green); flex-shrink: 0;
+  }
+  .day-dot.rest { background: var(--border-med); }
+  .day-info { flex: 1; }
+  .day-name { font-size: 14px; font-weight: 500; }
+  .day-meta { font-size: 12px; color: var(--text3); margin-top: 1px; }
+  .day-chevron {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--text3);
+    transition: transform 0.2s, background 0.15s;
+    flex-shrink: 0;
+  }
+  .day-card.open .day-chevron { transform: rotate(90deg); background: var(--green-light); color: var(--green); }
+
+  .day-body {
+    display: none;
+    border-top: 0.5px solid var(--border);
+    padding: 0 1.25rem 1.25rem;
+  }
+  .day-card.open .day-body { display: block; }
+
+  .rest-msg { font-size: 13px; color: var(--text3); font-style: italic; padding-top: 1rem; }
+
+  .warmup-note {
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    margin-top: 1rem;
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  .warmup-note strong { color: var(--text); font-weight: 500; }
+
+  /* Exercise Items */
+  .ex-item { padding: 14px 0; border-bottom: 0.5px solid var(--border); }
+  .ex-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .ex-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+  .ex-name { font-size: 14px; font-weight: 500; flex: 1; }
+  .ex-zone {
+    font-size: 10px; font-weight: 500;
+    background: var(--surface2); color: var(--text3);
+    padding: 3px 8px; border-radius: 20px; flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .ex-detail { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .ex-tip {
+    font-size: 11px; color: var(--green-mid);
+    background: var(--green-light);
+    padding: 4px 10px; border-radius: 6px;
+    display: inline-block; margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  /* Video embed */
+  .video-toggle {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: #185FA5;
+    cursor: pointer; background: none; border: none;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0; margin-bottom: 8px;
+    text-decoration: none;
+  }
+  .video-toggle svg { flex-shrink: 0; }
+
+  .video-container { display: none; margin-top: 8px; border-radius: 10px; overflow: hidden; background: #000; }
+  .video-container.open { display: block; }
+  .video-container iframe { width: 100%; height: 195px; border: none; display: block; }
+
+  /* ── EXERCÍCIOS POR ZONA ── */
+  .zone-section { margin-bottom: 1.5rem; }
+  .zone-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .zone-icon { font-size: 22px; }
+  .zone-info { flex: 1; }
+  .zone-name { font-size: 14px; font-weight: 500; }
+  .zone-desc { font-size: 12px; color: var(--text3); margin-top: 1px; }
+  .zone-chevron { font-size: 11px; color: var(--text3); transition: transform 0.2s; }
+  .zone-section.open .zone-chevron { transform: rotate(90deg); }
+
+  .zone-exercises { display: none; }
+  .zone-section.open .zone-exercises { display: block; }
+
+  .zone-ex-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+    margin-bottom: 8px;
+  }
+  .zone-ex-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .zone-ex-detail { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .zone-ex-tip { font-size: 11px; color: var(--green-mid); background: var(--green-light); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px; }
+
+  /* ── DICAS ── */
+  .tip-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .tip-icon { font-size: 22px; margin-bottom: 8px; }
+  .tip-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .tip-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  .nutrition-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nutrition-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+  }
+  .nutrition-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .nutrition-val { font-size: 18px; font-weight: 500; color: var(--green); }
+  .nutrition-desc { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-med); border-radius: 4px; }
+
+  /* Animated badge */
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .live-badge { animation: pulse 2s infinite; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="app-header">
+  <div class="header-inner">
+    <div class="header-logo">🌿</div>
+    <div class="header-text">
+      <h1>Plano da Andressa</h1>
+      <p>Basic Fit · Terneuzen · Pós-parto</p>
+    </div>
+    <div class="header-tag live-badge">Semana 1</div>
+  </div>
+</div>
+
+<!-- VIEW: CONFIGURAÇÃO -->
+<div class="view active" id="view-config">
+
+  <div class="section-label" style="margin-top:1.25rem">Disponibilidade</div>
+
+  <div class="form-group">
+    <label class="form-label">Quantos dias por semana treinas?</label>
+    <div class="chips" id="chips-days">
+      <div class="chip" data-val="2">2 dias</div>
+      <div class="chip active" data-val="3">3 dias</div>
+      <div class="chip" data-val="4">4 dias</div>
+      <div class="chip" data-val="5">5 dias</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Duração por sessão: <strong id="dur-label">50 min</strong></label>
+    <div class="slider-wrap">
+      <input type="range" id="dur-slider" min="30" max="90" step="5" value="50">
+      <span class="slider-val" id="dur-val">50 min</span>
+    </div>
+  </div>
+
+  <div class="section-label">Foco do treino</div>
+
+  <div class="form-group">
+    <label class="form-label">Seleciona tudo o que queres trabalhar</label>
+    <div class="chips" id="chips-focus">
+      <div class="chip active" data-val="core">Core & Abdômen</div>
+      <div class="chip active" data-val="energia">Energia & Bem-estar</div>
+      <div class="chip" data-val="gluteos">Glúteos & Pernas</div>
+      <div class="chip" data-val="superior">Parte Superior</div>
+      <div class="chip" data-val="cardio">Cardio Leve</div>
+    </div>
+  </div>
+
+  <div class="section-label">Como te sentes agora?</div>
+
+  <div class="form-group">
+    <select id="feel-select">
+      <option value="iniciando">🌱 Iniciando do zero, corpo ainda adaptando</option>
+      <option value="leve" selected>🌿 Pronta para movimento leve e progressivo</option>
+      <option value="ativa">💪 Recuperei bem, quero progredir</option>
+    </select>
+  </div>
+
+  <button class="btn-primary" onclick="generatePlan()">Gerar meu plano semanal ✦</button>
+
+</div>
+
+<!-- VIEW: PLANO -->
+<div class="view" id="view-plano">
+  <button class="btn-secondary" onclick="goBack()">← Ajustar preferências</button>
+
+  <div class="plan-tip">
+    <div class="plan-tip-label">Mensagem do dia</div>
+    <p id="plan-tip-text"></p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-val" id="s-days">3</div><div class="stat-lbl">dias/sem</div></div>
+    <div class="stat-card"><div class="stat-val" id="s-min">50</div><div class="stat-lbl">min/sessão</div></div>
+    <div class="stat-card"><div class="stat-val" id="s-ex">—</div><div class="stat-lbl">exercícios</div></div>
+  </div>
+
+  <div class="week-row">
+    <div class="week-title">Esta semana</div>
+    <div class="week-badge">Semana 1</div>
+  </div>
+
+  <div id="day-cards"></div>
+</div>
+
+<!-- VIEW: EXERCÍCIOS POR ZONA -->
+<div class="view" id="view-exercicios">
+
+  <div class="section-label" style="margin-top:1.25rem">Basic Fit Terneuzen · Zonas disponíveis</div>
+
+  <div id="zone-list"></div>
+</div>
+
+<!-- VIEW: DICAS -->
+<div class="view" id="view-dicas">
+
+  <div class="section-label" style="margin-top:1.25rem">Pós-parto & academia</div>
+
+  <div class="tip-card">
+    <div class="tip-icon">💆‍♀️</div>
+    <div class="tip-title">Antes de começar</div>
+    <p class="tip-text">Aguarda liberação médica completa — geralmente entre 6 a 8 semanas após o parto natural (ou mais para cesariana). Com 3 meses, podes começar com movimentos leves, mas respeita qualquer dor ou desconforto pélvico.</p>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon">🫁</div>
+    <div class="tip-title">Respiração primeiro</div>
+    <p class="tip-text">Em cada exercício, expira no momento de esforço (fase de subida/contração). Nunca prende a respiração — a pressão intra-abdominal pode sobrecarregar o assoalho pélvico ainda em recuperação.</p>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon">🔴</div>
+    <div class="tip-title">Sinais para parar</div>
+    <p class="tip-text">Para imediatamente e consulta profissional se sentires: dor pélvica ou lombar, sensação de pressão na vagina, perda de urina durante o exercício, diastasis (separação abdominal) visível. Estes sinais são comuns mas nunca normais para ignorar.</p>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon">💧</div>
+    <div class="tip-title">Hidratação durante amamentação</div>
+    <p class="tip-text">Se estiveres a amamentar, as necessidades de líquidos aumentam — bebe pelo menos 500ml a mais por dia. A Basic Fit vende Yanga Sports Water na receção.</p>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon">⏱️</div>
+    <div class="tip-title">Estrutura ideal da sessão (50 min)</div>
+    <p class="tip-text">
+      <strong>5 min</strong> — Aquecimento na esteira (ritmo leve)<br>
+      <strong>35 min</strong> — Treino principal (ver plano)<br>
+      <strong>10 min</strong> — Alongamento na Stretch Zone
+    </p>
+  </div>
+
+  <div class="section-label">Nutrição de suporte</div>
+
+  <div class="nutrition-row">
+    <div class="nutrition-card">
+      <div class="nutrition-label">Proteína</div>
+      <div class="nutrition-val">~1.6g</div>
+      <div class="nutrition-desc">por kg de peso corporal/dia</div>
+    </div>
+    <div class="nutrition-card">
+      <div class="nutrition-label">Calorias extra</div>
+      <div class="nutrition-val">+200</div>
+      <div class="nutrition-desc">kcal se amamentando</div>
+    </div>
+    <div class="nutrition-card">
+      <div class="nutrition-label">Ferro</div>
+      <div class="nutrition-val">18mg</div>
+      <div class="nutrition-desc">Essencial pós-parto</div>
+    </div>
+    <div class="nutrition-card">
+      <div class="nutrition-label">Vitamina D</div>
+      <div class="nutrition-val">800 UI</div>
+      <div class="nutrition-desc">Especialmente na Holanda</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-btn active" onclick="showView('config',this)">
+    <div class="nav-icon">⚙️</div>Configurar
+  </button>
+  <button class="nav-btn" onclick="showView('plano',this)">
+    <div class="nav-icon">📅</div>Plano
+  </button>
+  <button class="nav-btn" onclick="showView('exercicios',this)">
+    <div class="nav-icon">🏋️</div>Exercícios
+  </button>
+  <button class="nav-btn" onclick="showView('dicas',this)">
+    <div class="nav-icon">💡</div>Dicas
+  </button>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const TIPS = {
+  iniciando: "Cada treino é uma vitória. Não precisas fazer muito — precisas aparecer. O corpo vai agradecer cada movimento gentil.",
+  leve: "Estás a reconstruir, não a começar do zero. Usa o que conheces, respeita o tempo de recuperação e progride no teu ritmo.",
+  ativa: "Tens base e tens motivação — ótima combinação. Foca na técnica antes de adicionar carga. Resultados duradouros constroem-se com paciência."
+};
+
+const WEEKDAYS = ["Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"];
+
+const EXERCISES = {
+  core: [
+    {
+      name: "Prancha isométrica",
+      zone: "Functional Zone",
+      detail: "3 séries × 20–30 seg",
+      tip: "🌿 Ativa o assoalho pélvico ao subir — nunca segures a respiração",
+      ytId: "pSHjTRCQxIw"
+    },
+    {
+      name: "Bird-dog",
+      zone: "Stretch Zone",
+      detail: "3 séries × 10 rep cada lado",
+      tip: "🌿 Costas neutras, movimento lento e controlado",
+      ytId: "wiFNA3sqjCA"
+    },
+    {
+      name: "Dead bug",
+      zone: "Stretch Zone",
+      detail: "3 séries × 8 rep cada lado",
+      tip: "🌿 Lombar sempre colada no chão, não arqueia",
+      ytId: "g_BYB0R-4Ws"
+    },
+    {
+      name: "Ponte glútea",
+      zone: "Stretch Zone",
+      detail: "3 séries × 12 rep",
+      tip: "🌿 Aperta o glúteo no topo, não empurra a lombar",
+      ytId: "OUgsJ8-Vi0E"
+    },
+    {
+      name: "Respiração diafragmática ativa",
+      zone: "Stretch Zone",
+      detail: "2 séries × 10 respirações profundas",
+      tip: "🌿 O exercício mais importante do pós-parto",
+      ytId: "ri2PVQNT9mQ"
+    }
+  ],
+  energia: [
+    {
+      name: "Caminhada na esteira (inclinação 5%)",
+      zone: "Cardio Zone",
+      detail: "10–12 min contínuos, 5–6 km/h",
+      tip: "⚡ Eleva o humor via endorfinas, sem impacto excessivo",
+      ytId: "blH募HmbPg0"
+    },
+    {
+      name: "Bicicleta ergométrica (ritmo moderado)",
+      zone: "Cardio Zone",
+      detail: "10 min, FC ≤ 130 bpm",
+      tip: "⚡ Zero impacto articular — perfeito para recomeçar",
+      ytId: "wD5kBCaQ_sk"
+    },
+    {
+      name: "Elíptico (resistência 2–3)",
+      zone: "Cardio Zone",
+      detail: "10 min contínuos",
+      tip: "⚡ Treino completo de corpo todo sem impacto",
+      ytId: "QXMB4PLxxCM"
+    },
+    {
+      name: "Agachamento livre (peso corporal)",
+      zone: "Free Weight Zone",
+      detail: "3 séries × 15 rep",
+      tip: "⚡ Pés alinhados com quadril, joelhos seguem os pés",
+      ytId: "xqvCmoLULNY"
+    }
+  ],
+  gluteos: [
+    {
+      name: "Hip thrust com haltere",
+      zone: "Free Weight Zone",
+      detail: "4 séries × 12 rep",
+      tip: "🍑 Costas no banco, haltere no quadril — avança o peso semanalmente",
+      ytId: "LM8XHLYJoYs"
+    },
+    {
+      name: "Abdução com elástico (lateral walk)",
+      zone: "Functional Zone",
+      detail: "3 séries × 15 passos cada lado",
+      tip: "🍑 Elástico acima dos joelhos, postura ereta",
+      ytId: "dqfXJbxzfxo"
+    },
+    {
+      name: "Passada reversa",
+      zone: "Free Weight Zone",
+      detail: "3 séries × 10 rep cada perna",
+      tip: "🍑 Menos impacto que a passada à frente — ótimo para iniciantes",
+      ytId: "csN1-_l3hvo"
+    },
+    {
+      name: "Leg press (carga leve)",
+      zone: "Strength Zone",
+      detail: "3 séries × 15 rep",
+      tip: "🍑 Pés altos na plataforma = mais ativação glútea",
+      ytId: "IZxyjW7MPJQ"
+    }
+  ],
+  superior: [
+    {
+      name: "Remada com haltere (unilateral)",
+      zone: "Free Weight Zone",
+      detail: "3 séries × 12 rep cada braço",
+      tip: "💪 Costas planas, cotovelo rente ao corpo",
+      ytId: "roCP442LA5w"
+    },
+    {
+      name: "Supino com halteres (leve)",
+      zone: "Free Weight Zone",
+      detail: "3 séries × 12 rep",
+      tip: "💪 Começa com 4–5 kg, foco na conexão com o músculo",
+      ytId: "VmB1G1K7v94"
+    },
+    {
+      name: "Desenvolvimento ombros",
+      zone: "Free Weight Zone",
+      detail: "3 séries × 10 rep",
+      tip: "💪 Cotovelos a 90° na base, não eleva os ombros",
+      ytId: "HzIiNhHhhtA"
+    },
+    {
+      name: "Rosca direta com haltere",
+      zone: "Free Weight Zone",
+      detail: "3 séries × 12 rep",
+      tip: "💪 Bíceps forte = segurar o Miguel com mais facilidade!",
+      ytId: "in7PaeYlhrg"
+    }
+  ],
+  cardio: [
+    {
+      name: "Intervalo na esteira (caminhada/trote)",
+      zone: "Cardio Zone",
+      detail: "10 min: 2 min caminhada + 1 min trote leve × 3",
+      tip: "🏃 Só trote após 8–10 semanas com liberação médica",
+      ytId: "YgVFCd8q1T4"
+    },
+    {
+      name: "Rowing machine (remada)",
+      zone: "Cardio Zone",
+      detail: "8 min contínuos, ritmo confortável",
+      tip: "🏃 Excelente para costas e core — técnica: empurra com as pernas primeiro",
+      ytId: "7S4JYbRj0Vs"
+    }
+  ]
+};
+
+const ZONES = [
+  {
+    icon: "🚴",
+    name: "Cardio Zone",
+    desc: "Esteiras · Bikes · Elípticos · Rowing (equipamentos Matrix)",
+    exercises: ["Caminhada na esteira (5% inclinação)", "Bicicleta ergométrica", "Elíptico (resistência 2–3)", "Rowing machine", "Virtual cycling"]
+  },
+  {
+    icon: "🏋️",
+    name: "Strength Zone",
+    desc: "Máquinas guiadas com cabos e pesos — informação muscular em cada aparelho",
+    exercises: ["Leg press", "Leg extension", "Leg curl", "Cabo para costas (lat pulldown)", "Polia para ombros e braços"]
+  },
+  {
+    icon: "🪨",
+    name: "Free Weight Zone",
+    desc: "Halteres · Barras · Kettlebells · Anilhas — treino livre e funcional",
+    exercises: ["Agachamento com halteres", "Hip thrust com haltere", "Remada unilateral", "Supino com halteres", "Desenvolvimento ombros", "Rosca direta"]
+  },
+  {
+    icon: "⚡",
+    name: "Functional Zone",
+    desc: "Rack funcional · Slam balls · Plyo boxes · Elásticos · Kettlebells",
+    exercises: ["Prancha isométrica", "Abdução com elástico", "Kettlebell swing (após semana 6)", "TRX (após semana 4)", "Caixa de step"]
+  },
+  {
+    icon: "🧘",
+    name: "Stretch Zone",
+    desc: "Tapetes · Rolo de espuma · Área de mobilidade e recuperação",
+    exercises: ["Bird-dog", "Dead bug", "Ponte glútea", "Respiração diafragmática", "Foam roller glúteo e costas", "Hip flexor stretch"]
+  }
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let cfg = { days: 3, dur: 50, focus: ["core","energia"], feel: "leve" };
+let planGenerated = false;
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", () => {
+  buildZones();
+
+  document.getElementById("dur-slider").addEventListener("input", function(){
+    cfg.dur = parseInt(this.value);
+    document.getElementById("dur-val").textContent = cfg.dur + " min";
+    document.getElementById("dur-label").textContent = cfg.dur + " min";
+  });
+
+  chipGroup("chips-days", false, vals => cfg.days = parseInt(vals[0]));
+  chipGroup("chips-focus", true, vals => cfg.focus = vals);
+  document.getElementById("feel-select").addEventListener("change", function(){ cfg.feel = this.value; });
+});
+
+function chipGroup(id, multi, onChange) {
+  document.querySelectorAll("#" + id + " .chip").forEach(c => {
+    c.addEventListener("click", function(){
+      if(!multi) {
+        document.querySelectorAll("#" + id + " .chip").forEach(x => x.classList.remove("active"));
+        this.classList.add("active");
+      } else {
+        this.classList.toggle("active");
+        const any = document.querySelector("#" + id + " .chip.active");
+        if(!any) this.classList.add("active");
+      }
+      const active = Array.from(document.querySelectorAll("#" + id + " .chip.active")).map(x => x.dataset.val);
+      onChange(active);
+    });
+  });
+}
+
+// ─────────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────────
+function showView(name, btn) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById("view-" + name).classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  showView("config", document.querySelector(".nav-btn:first-child"));
+}
+
+// ─────────────────────────────────────────────
+// PLAN GENERATION
+// ─────────────────────────────────────────────
+function generatePlan() {
+  cfg.feel = document.getElementById("feel-select").value;
+
+  document.getElementById("plan-tip-text").textContent = TIPS[cfg.feel];
+  document.getElementById("s-days").textContent = cfg.days;
+  document.getElementById("s-min").textContent = cfg.dur;
+
+  const trainIdx = getTrainDays(cfg.days);
+  let totalEx = 0;
+  const html = WEEKDAYS.map((day, i) => {
+    if(!trainIdx.includes(i)) {
+      return `<div class="day-card">
+        <div class="day-header">
+          <div class="day-dot rest"></div>
+          <div class="day-info">
+            <div class="day-name">${day}</div>
+            <div class="day-meta">Descanso ativo</div>
+          </div>
+        </div>
+        <div class="rest-msg" style="padding:0 1.25rem 1rem;">Caminhada leve, alongamento em casa ou simplesmente descansa — tudo conta 🌿</div>
+      </div>`;
+    }
+
+    const exs = pickExercises(cfg.focus, cfg.dur);
+    totalEx += exs.length;
+    const exHtml = exs.map((ex, ei) => `
+      <div class="ex-item">
+        <div class="ex-header">
+          <div class="ex-name">${ex.name}</div>
+          <div class="ex-zone">${ex.zone}</div>
+        </div>
+        <div class="ex-detail">${ex.detail}</div>
+        <div class="ex-tip">${ex.tip}</div>
+        <br>
+        <button class="video-toggle" onclick="toggleVideo('vid-${i}-${ei}')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#185FA5"/><polygon points="5.5,4.5 10,7 5.5,9.5" fill="#185FA5"/></svg>
+          Ver demonstração em vídeo
+        </button>
+        <div class="video-container" id="vid-${i}-${ei}">
+          <iframe
+            src="about:blank"
+            data-src="https://www.youtube.com/embed/${ex.ytId}?rel=0&modestbranding=1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>`).join("");
+
+    return `<div class="day-card" id="day-${i}">
+      <div class="day-header" onclick="toggleDay(${i})">
+        <div class="day-dot"></div>
+        <div class="day-info">
+          <div class="day-name">${day}</div>
+          <div class="day-meta">Treino · ${cfg.dur} min · ${exs.length} exercícios</div>
+        </div>
+        <div class="day-chevron">▶</div>
+      </div>
+      <div class="day-body">
+        <div class="warmup-note">
+          <strong>Aquecimento (5 min):</strong> Caminhada na esteira, inclinação 3–5%, velocidade confortável. Ativa o corpo antes de pegar nos pesos.
+        </div>
+        ${exHtml}
+      </div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("s-ex").textContent = totalEx;
+  document.getElementById("day-cards").innerHTML = html;
+  planGenerated = true;
+
+  showView("plano", document.querySelectorAll(".nav-btn")[1]);
+}
+
+function getTrainDays(n) {
+  const patterns = {
+    2: [0,3],
+    3: [0,2,4],
+    4: [0,1,3,4],
+    5: [0,1,2,3,4]
+  };
+  return patterns[n] || [0,2,4];
+}
+
+function pickExercises(focusArr, dur) {
+  let pool = [];
+  focusArr.forEach(f => { if(EXERCISES[f]) pool = pool.concat(EXERCISES[f]); });
+  // shuffle
+  for(let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const count = dur <= 40 ? 4 : dur <= 60 ? 5 : 6;
+  const seen = new Set();
+  return pool.filter(ex => {
+    if(seen.has(ex.name)) return false;
+    seen.add(ex.name);
+    return true;
+  }).slice(0, count);
+}
+
+// ─────────────────────────────────────────────
+// INTERACTIONS
+// ─────────────────────────────────────────────
+function toggleDay(idx) {
+  const card = document.getElementById("day-" + idx);
+  card.classList.toggle("open");
+}
+
+function toggleVideo(id) {
+  const container = document.getElementById(id);
+  const iframe = container.querySelector("iframe");
+  if(!container.classList.contains("open")) {
+    container.classList.add("open");
+    const src = iframe.dataset.src;
+    if(iframe.src !== src) iframe.src = src;
+  } else {
+    container.classList.remove("open");
+    iframe.src = "about:blank";
+  }
+}
+
+function buildZones() {
+  const html = ZONES.map((z, zi) => `
+    <div class="zone-section" id="zone-${zi}">
+      <div class="zone-header" onclick="toggleZone(${zi})">
+        <div class="zone-icon">${z.icon}</div>
+        <div class="zone-info">
+          <div class="zone-name">${z.name}</div>
+          <div class="zone-desc">${z.desc}</div>
+        </div>
+        <div class="zone-chevron">▶</div>
+      </div>
+      <div class="zone-exercises">
+        ${z.exercises.map(ex => `
+          <div class="zone-ex-card">
+            <div class="zone-ex-name">${ex}</div>
+            <div class="zone-ex-detail" style="font-size:12px;color:var(--text3);">Disponível na ${z.name}</div>
+          </div>`).join("")}
+      </div>
+    </div>`).join("");
+  document.getElementById("zone-list").innerHTML = html;
+}
+
+function toggleZone(zi) {
+  const el = document.getElementById("zone-" + zi);
+  el.classList.toggle("open");
+}
+</script>
+</body>
+</html>
