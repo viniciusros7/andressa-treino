@@ -3,949 +3,840 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Plano da Andressa · Basic Fit Terneuzen</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Treino da Andressa 🏋️</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Andressa">
+<meta name="theme-color" content="#1D9E75">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green: #1D9E75;
-    --green-light: #E1F5EE;
-    --green-dark: #085041;
-    --green-mid: #0F6E56;
-    --teal-accent: #5DCAA5;
-    --bg: #FAFAF8;
-    --surface: #FFFFFF;
-    --surface2: #F5F4F0;
-    --border: rgba(0,0,0,0.08);
-    --border-med: rgba(0,0,0,0.14);
-    --text: #1A1A18;
-    --text2: #5F5E5A;
-    --text3: #888780;
-    --radius: 14px;
-    --radius-sm: 8px;
-    --shadow: 0 2px 12px rgba(0,0,0,0.06);
-    --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
-  }
+:root{
+  --bg:#f5f9f7;--card:#fff;--primary:#1D9E75;--primary-light:#c8ede0;--primary-dark:#085041;
+  --accent:#5DCAA5;--teal:#0F6E56;--green-light:#E1F5EE;
+  --warn:#e8856a;--warn-light:#fdeee8;
+  --text:#1e2d28;--text-soft:#557062;--text-muted:#8aab99;--border:#cce8dc;
+  --shadow:0 4px 20px rgba(13,80,65,0.08);--radius:18px;--radius-sm:12px;
+  --yellow:#f5c842;--yellow-light:#fdf3d0;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;max-width:480px;margin:0 auto;padding-bottom:80px;}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+/* ── HEADER ── */
+.header{background:var(--card);border-bottom:2px solid var(--border);padding:14px 18px;
+  display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
+.header-left h1{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--primary-dark);}
+.header-left span{font-size:0.72rem;color:var(--text-soft);font-weight:700;}
+.streak-badge{background:var(--yellow-light);border:2px solid var(--yellow);border-radius:50px;padding:6px 14px;
+  font-size:0.85rem;font-weight:800;color:#8a6200;display:flex;align-items:center;gap:5px;}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    max-width: 480px;
-    margin: 0 auto;
-    padding-bottom: 3rem;
-  }
+/* ── NAV ── */
+.nav{display:flex;background:var(--card);border-bottom:2px solid var(--border);overflow-x:auto;scrollbar-width:none;position:sticky;top:57px;z-index:99;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-btn{flex:0 0 auto;padding:11px 14px;border:none;background:transparent;color:var(--text-muted);
+  font-family:'Nunito',sans-serif;font-size:0.76rem;font-weight:800;cursor:pointer;
+  border-bottom:3px solid transparent;transition:all 0.2s;white-space:nowrap;}
+.nav-btn.active{color:var(--primary);border-bottom-color:var(--primary);}
 
-  /* ── HEADER ── */
-  .app-header {
-    background: var(--surface);
-    border-bottom: 0.5px solid var(--border);
-    padding: 1.5rem 1.25rem 1.25rem;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .header-inner { display: flex; align-items: center; gap: 12px; }
-  .header-logo {
-    width: 42px; height: 42px; border-radius: 12px;
-    background: var(--green-light);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
-  .header-text h1 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; }
-  .header-text p { font-size: 12px; color: var(--text3); margin-top: 1px; }
-  .header-tag {
-    margin-left: auto;
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-size: 11px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-    flex-shrink: 0;
-  }
+/* ── MAIN ── */
+.main{padding:18px 16px 20px;}
+.section{display:none;}
+.section.active{display:block;animation:fadeIn 0.25s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ── VIEWS ── */
-  .view { display: none; padding: 1.25rem; }
-  .view.active { display: block; }
+/* ── CARDS ── */
+.card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);border:1.5px solid var(--border);}
+.card-title{font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px;}
 
-  /* ── NAV TABS (bottom) ── */
-  .bottom-nav {
-    position: fixed;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 100%; max-width: 480px;
-    background: var(--surface);
-    border-top: 0.5px solid var(--border);
-    display: flex;
-    z-index: 20;
-  }
-  .nav-btn {
-    flex: 1;
-    padding: 10px 0 12px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    color: var(--text3);
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
-    transition: color 0.15s;
-  }
-  .nav-btn.active { color: var(--green); }
-  .nav-icon { font-size: 18px; line-height: 1; }
+/* ── HOME ── */
+.welcome-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:white;
+  border-radius:var(--radius);padding:22px 18px;margin-bottom:14px;position:relative;overflow:hidden;}
+.welcome-card::before{content:'🌿';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:3rem;opacity:0.25;}
+.welcome-card h2{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:4px;}
+.welcome-card p{font-size:0.85rem;opacity:0.88;line-height:1.5;}
 
-  /* ── SECTION LABEL ── */
-  .section-label {
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  .section-label:first-child { margin-top: 0; }
+.stat-row{display:flex;gap:10px;margin-bottom:14px;}
+.stat-box{flex:1;background:var(--card);border-radius:var(--radius-sm);padding:14px 10px;text-align:center;box-shadow:var(--shadow);border:1.5px solid var(--border);}
+.stat-num{font-size:1.7rem;font-weight:900;color:var(--primary);}
+.stat-label{font-size:0.65rem;color:var(--text-muted);font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;}
 
-  /* ── CONFIGURAÇÃO ── */
-  .form-group { margin-bottom: 1.25rem; }
-  .form-label { font-size: 13px; color: var(--text2); margin-bottom: 8px; display: block; }
-  .form-label strong { color: var(--text); font-weight: 500; }
+.week-tracker{display:flex;gap:6px;justify-content:space-between;margin-bottom:4px;}
+.wk-day{flex:1;text-align:center;}
+.wk-name{font-size:0.62rem;color:var(--text-muted);font-weight:800;margin-bottom:4px;}
+.wk-dot{width:100%;aspect-ratio:1;border-radius:50%;border:2px solid var(--border);background:var(--bg);max-width:34px;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:0.7rem;transition:all 0.3s;}
+.wk-dot.done{background:var(--primary);border-color:var(--primary);color:white;}
+.wk-dot.today{border-color:var(--warn);border-width:3px;}
+.wk-dot.done.today{background:var(--primary);border-color:var(--primary-dark);}
 
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip {
-    padding: 7px 16px;
-    border-radius: 24px;
-    border: 0.5px solid var(--border-med);
-    font-size: 13px;
-    cursor: pointer;
-    background: var(--surface);
-    color: var(--text2);
-    transition: all 0.15s;
-    user-select: none;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .chip.active {
-    background: var(--green);
-    border-color: var(--green);
-    color: #fff;
-  }
+.tip-box{background:var(--warn-light);border:1.5px solid #f5c4a8;border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:14px;}
+.tip-box-title{font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:var(--warn);margin-bottom:5px;}
+.tip-box p{font-size:0.85rem;color:#7a3a20;line-height:1.55;}
 
-  .slider-wrap { display: flex; align-items: center; gap: 12px; }
-  input[type=range] {
-    flex: 1; -webkit-appearance: none; height: 4px;
-    background: var(--border-med); border-radius: 4px; outline: none;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 20px; height: 20px;
-    border-radius: 50%; background: var(--green);
-    cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  }
-  .slider-val { font-size: 14px; font-weight: 500; color: var(--green); min-width: 56px; text-align: right; }
+/* ── PLANO ── */
+.day-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow);}
+.day-header{display:flex;align-items:center;padding:15px 16px;cursor:pointer;gap:12px;}
+.day-dot{width:12px;height:12px;border-radius:50%;background:var(--primary);flex-shrink:0;}
+.day-dot.rest{background:var(--border);}
+.day-dot.done{background:var(--yellow);}
+.day-info{flex:1;}
+.day-name{font-size:1rem;font-weight:800;color:var(--text);}
+.day-meta{font-size:0.75rem;color:var(--text-soft);margin-top:1px;font-weight:600;}
+.day-badge{font-size:0.65rem;font-weight:800;padding:4px 10px;border-radius:20px;background:var(--green-light);color:var(--teal);flex-shrink:0;}
+.day-badge.done-badge{background:var(--yellow-light);color:#8a6200;}
+.day-chevron{font-size:0.75rem;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0;}
+.day-card.open .day-chevron{transform:rotate(90deg);}
 
-  select {
-    width: 100%;
-    padding: 10px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    border-radius: var(--radius-sm);
-    border: 0.5px solid var(--border-med);
-    background: var(--surface);
-    color: var(--text);
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-  }
+.day-body{display:none;border-top:1.5px solid var(--border);}
+.day-card.open .day-body{display:block;}
 
-  .btn-primary {
-    width: 100%;
-    padding: 15px;
-    background: var(--green);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    letter-spacing: 0.01em;
-    transition: opacity 0.15s, transform 0.1s;
-  }
-  .btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+.done-btn{width:100%;padding:12px;background:var(--green-light);border:none;border-top:1.5px solid var(--border);
+  font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:800;color:var(--teal);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;transition:all 0.2s;}
+.done-btn.marked{background:var(--yellow-light);color:#8a6200;}
+.done-btn:active{opacity:0.8;}
 
-  .btn-secondary {
-    background: none;
-    border: 0.5px solid var(--border-med);
-    border-radius: var(--radius-sm);
-    padding: 9px 18px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    color: var(--text2);
-    margin-bottom: 1.25rem;
-    transition: background 0.15s;
-  }
-  .btn-secondary:active { background: var(--surface2); }
+.warmup-strip{background:var(--green-light);padding:10px 16px;font-size:0.78rem;color:var(--teal);font-weight:700;}
 
-  /* ── PLANO ── */
-  .plan-tip {
-    background: var(--green-light);
-    border-radius: var(--radius);
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.25rem;
-  }
-  .plan-tip-label { font-size: 10px; font-weight: 500; color: var(--green-mid); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .plan-tip p { font-size: 13px; color: var(--green-dark); line-height: 1.55; }
+/* Exercise item */
+.ex-item{padding:14px 16px;border-bottom:1.5px solid var(--border);}
+.ex-item:last-of-type{border-bottom:none;}
+.ex-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px;}
+.ex-name{font-size:0.95rem;font-weight:800;flex:1;color:var(--text);}
+.ex-zone-tag{font-size:0.6rem;font-weight:800;padding:3px 9px;border-radius:20px;background:var(--primary-light);color:var(--primary-dark);flex-shrink:0;white-space:nowrap;}
+.ex-detail{font-size:0.8rem;color:var(--text-soft);margin-bottom:5px;font-weight:600;}
+.ex-tip{font-size:0.75rem;color:var(--teal);background:var(--green-light);padding:5px 10px;border-radius:8px;display:inline-block;margin-bottom:10px;line-height:1.4;font-weight:700;}
 
-  .stats-row { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 1.25rem; }
-  .stat-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 0.875rem 0.5rem;
-    text-align: center;
-  }
-  .stat-val { font-size: 22px; font-weight: 500; color: var(--green); line-height: 1; }
-  .stat-lbl { font-size: 10px; color: var(--text3); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+/* Peso input */
+.peso-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.peso-label{font-size:0.72rem;font-weight:800;color:var(--text-muted);white-space:nowrap;}
+.peso-input{width:70px;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;
+  font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;color:var(--primary-dark);text-align:center;outline:none;}
+.peso-input:focus{border-color:var(--primary);}
+.peso-unit{font-size:0.72rem;color:var(--text-muted);font-weight:700;}
+.peso-prev{font-size:0.7rem;color:var(--text-muted);font-style:italic;}
 
-  .week-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-  .week-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; font-style: italic; }
-  .week-badge { font-size: 11px; background: var(--green-light); color: var(--green-mid); padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+/* Check row */
+.check-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.ex-check{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--border);background:white;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;
+  flex-shrink:0;transition:all 0.2s;font-weight:900;}
+.ex-check.checked{background:var(--primary);border-color:var(--primary);color:white;}
+.check-label{font-size:0.8rem;color:var(--text-soft);font-weight:600;}
 
-  /* Day Cards */
-  .day-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 10px;
-    overflow: hidden;
-    transition: box-shadow 0.2s;
-  }
-  .day-card:active { box-shadow: var(--shadow-card); }
+/* Video */
+.video-btn{display:inline-flex;align-items:center;gap:5px;font-size:0.75rem;color:#185FA5;
+  cursor:pointer;background:none;border:none;font-family:'Nunito',sans-serif;font-weight:700;padding:0;}
+.video-wrap{display:none;margin-top:10px;border-radius:10px;overflow:hidden;background:#000;}
+.video-wrap.open{display:block;}
+.video-wrap iframe{width:100%;height:195px;border:none;display:block;}
 
-  .day-header {
-    display: flex; align-items: center;
-    padding: 1rem 1.25rem;
-    cursor: pointer;
-    gap: 12px;
-  }
-  .day-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--green); flex-shrink: 0;
-  }
-  .day-dot.rest { background: var(--border-med); }
-  .day-info { flex: 1; }
-  .day-name { font-size: 14px; font-weight: 500; }
-  .day-meta { font-size: 12px; color: var(--text3); margin-top: 1px; }
-  .day-chevron {
-    width: 20px; height: 20px; border-radius: 50%;
-    background: var(--surface2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px; color: var(--text3);
-    transition: transform 0.2s, background 0.15s;
-    flex-shrink: 0;
-  }
-  .day-card.open .day-chevron { transform: rotate(90deg); background: var(--green-light); color: var(--green); }
+/* Rest day */
+.rest-msg{padding:14px 16px;font-size:0.85rem;color:var(--text-muted);font-style:italic;font-weight:600;}
 
-  .day-body {
-    display: none;
-    border-top: 0.5px solid var(--border);
-    padding: 0 1.25rem 1.25rem;
-  }
-  .day-card.open .day-body { display: block; }
+/* ── HISTÓRICO ── */
+.perf-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.perf-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--primary-dark);}
+.perf-week-sel{font-size:0.75rem;font-weight:800;color:var(--text-soft);background:var(--bg);
+  border:1.5px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;font-family:'Nunito',sans-serif;}
 
-  .rest-msg { font-size: 13px; color: var(--text3); font-style: italic; padding-top: 1rem; }
+.perf-day-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow);}
+.perf-day-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.perf-day-name{font-size:0.9rem;font-weight:800;}
+.perf-day-date{font-size:0.72rem;color:var(--text-muted);font-weight:700;}
+.perf-done-badge{font-size:0.65rem;font-weight:800;padding:3px 10px;border-radius:20px;}
+.perf-done-badge.yes{background:var(--green-light);color:var(--teal);}
+.perf-done-badge.no{background:#fde8e8;color:#c0392b;}
 
-  .warmup-note {
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    padding: 8px 12px;
-    margin-top: 1rem;
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.5;
-  }
-  .warmup-note strong { color: var(--text); font-weight: 500; }
+.perf-ex-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
+.perf-ex-row:last-child{border-bottom:none;}
+.perf-ex-name{font-size:0.82rem;font-weight:700;flex:1;}
+.perf-ex-check{font-size:0.85rem;}
+.perf-ex-peso{font-size:0.78rem;color:var(--primary);font-weight:800;background:var(--green-light);padding:2px 8px;border-radius:20px;}
 
-  /* Exercise Items */
-  .ex-item { padding: 14px 0; border-bottom: 0.5px solid var(--border); }
-  .ex-item:last-child { border-bottom: none; padding-bottom: 0; }
+.no-history{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:0.88rem;font-weight:600;}
 
-  .ex-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
-  .ex-name { font-size: 14px; font-weight: 500; flex: 1; }
-  .ex-zone {
-    font-size: 10px; font-weight: 500;
-    background: var(--surface2); color: var(--text3);
-    padding: 3px 8px; border-radius: 20px; flex-shrink: 0;
-    white-space: nowrap;
-  }
-  .ex-detail { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
-  .ex-tip {
-    font-size: 11px; color: var(--green-mid);
-    background: var(--green-light);
-    padding: 4px 10px; border-radius: 6px;
-    display: inline-block; margin-bottom: 10px;
-    line-height: 1.4;
-  }
+/* ── DICAS ── */
+.dica-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:12px;box-shadow:var(--shadow);}
+.dica-icon{font-size:1.5rem;margin-bottom:8px;}
+.dica-title{font-size:0.95rem;font-weight:800;margin-bottom:6px;color:var(--text);}
+.dica-text{font-size:0.85rem;color:var(--text-soft);line-height:1.65;font-weight:600;}
+.dica-text strong{color:var(--text);}
 
-  /* Video embed */
-  .video-toggle {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px; color: #185FA5;
-    cursor: pointer; background: none; border: none;
-    font-family: 'DM Sans', sans-serif;
-    padding: 0; margin-bottom: 8px;
-    text-decoration: none;
-  }
-  .video-toggle svg { flex-shrink: 0; }
+.alert-card{background:var(--warn-light);border:1.5px solid #f5c4a8;border-radius:var(--radius);padding:18px;margin-bottom:12px;}
+.alert-card .dica-title{color:var(--warn);}
+.alert-card .dica-text{color:#7a3a20;}
 
-  .video-container { display: none; margin-top: 8px; border-radius: 10px; overflow: hidden; background: #000; }
-  .video-container.open { display: block; }
-  .video-container iframe { width: 100%; height: 195px; border: none; display: block; }
+.nutri-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.nutri-item{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:14px 12px;text-align:center;}
+.nutri-val{font-size:1.4rem;font-weight:900;color:var(--primary);}
+.nutri-label{font-size:0.65rem;color:var(--text-muted);font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;}
+.nutri-desc{font-size:0.72rem;color:var(--text-soft);margin-top:2px;font-weight:600;}
 
-  /* ── EXERCÍCIOS POR ZONA ── */
-  .zone-section { margin-bottom: 1.5rem; }
-  .zone-header {
-    display: flex; align-items: center; gap: 10px;
-    padding: 1rem 1.25rem;
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 8px;
-    cursor: pointer;
-  }
-  .zone-icon { font-size: 22px; }
-  .zone-info { flex: 1; }
-  .zone-name { font-size: 14px; font-weight: 500; }
-  .zone-desc { font-size: 12px; color: var(--text3); margin-top: 1px; }
-  .zone-chevron { font-size: 11px; color: var(--text3); transition: transform 0.2s; }
-  .zone-section.open .zone-chevron { transform: rotate(90deg); }
+/* ── BOTÃO PRINCIPAL ── */
+.btn-main{width:100%;padding:15px;background:var(--primary);color:white;border:none;border-radius:50px;
+  font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;margin-top:6px;
+  transition:all 0.2s;letter-spacing:0.02em;}
+.btn-main:active{opacity:0.85;transform:scale(0.98);}
 
-  .zone-exercises { display: none; }
-  .zone-section.open .zone-exercises { display: block; }
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{padding:8px 16px;border-radius:24px;border:2px solid var(--border);font-size:0.82rem;cursor:pointer;
+  background:var(--card);color:var(--text-soft);transition:all 0.15s;user-select:none;font-family:'Nunito',sans-serif;font-weight:700;}
+.chip.active{background:var(--primary);border-color:var(--primary);color:#fff;}
 
-  .zone-ex-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 1rem 1.25rem;
-    margin-bottom: 8px;
-  }
-  .zone-ex-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
-  .zone-ex-detail { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
-  .zone-ex-tip { font-size: 11px; color: var(--green-mid); background: var(--green-light); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px; }
+/* Slider */
+.slider-row{display:flex;align-items:center;gap:12px;}
+input[type=range]{flex:1;-webkit-appearance:none;height:5px;background:var(--border);border-radius:5px;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--primary);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+.slider-val{font-size:0.9rem;font-weight:800;color:var(--primary);min-width:58px;text-align:right;}
 
-  /* ── DICAS ── */
-  .tip-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    margin-bottom: 10px;
-  }
-  .tip-icon { font-size: 22px; margin-bottom: 8px; }
-  .tip-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
-  .tip-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+select{width:100%;padding:11px 14px;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;
+  border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--card);color:var(--text);
+  appearance:none;-webkit-appearance:none;outline:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238aab99' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;}
 
-  .nutrition-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .nutrition-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 1rem;
-  }
-  .nutrition-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-  .nutrition-val { font-size: 18px; font-weight: 500; color: var(--green); }
-  .nutrition-desc { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.form-label{font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft);margin-bottom:8px;display:block;}
+.form-group{margin-bottom:16px;}
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border-med); border-radius: 4px; }
-
-  /* Animated badge */
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
-  .live-badge { animation: pulse 2s infinite; }
+/* Section title inside pages */
+.sec-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--primary-dark);margin-bottom:4px;}
+.sec-sub{font-size:0.78rem;color:var(--text-soft);font-weight:600;margin-bottom:14px;}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="app-header">
-  <div class="header-inner">
-    <div class="header-logo">🌿</div>
-    <div class="header-text">
-      <h1>Plano da Andressa</h1>
-      <p>Basic Fit · Terneuzen · Pós-parto</p>
-    </div>
-    <div class="header-tag live-badge">Semana 1</div>
+<div class="header">
+  <div class="header-left">
+    <h1>Treino da Andressa 🌿</h1>
+    <span>Basic Fit · Terneuzen · Pós-parto</span>
   </div>
+  <div class="streak-badge" id="streak-badge">🔥 <span id="streak-num">0</span> dias</div>
 </div>
 
-<!-- VIEW: CONFIGURAÇÃO -->
-<div class="view active" id="view-config">
+<div class="nav">
+  <button class="nav-btn active" onclick="showSection('home',this)">🏠 Início</button>
+  <button class="nav-btn" onclick="showSection('config',this)">⚙️ Configurar</button>
+  <button class="nav-btn" onclick="showSection('plano',this)">📅 Plano</button>
+  <button class="nav-btn" onclick="showSection('historico',this)">📊 Histórico</button>
+  <button class="nav-btn" onclick="showSection('dicas',this)">💡 Dicas</button>
+</div>
 
-  <div class="section-label" style="margin-top:1.25rem">Disponibilidade</div>
+<div class="main">
+
+<!-- ══════════════════ HOME ══════════════════ -->
+<div class="section active" id="sec-home">
+
+  <div class="welcome-card">
+    <h2>Olá, Andressa! 👋</h2>
+    <p>Estás a fazer um trabalho incrível — para ti e para o Miguel. Cada treino conta.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" id="home-treinos">0</div><div class="stat-label">Treinos feitos</div></div>
+    <div class="stat-box"><div class="stat-num" id="home-exercicios">0</div><div class="stat-label">Exercícios ✓</div></div>
+    <div class="stat-box"><div class="stat-num" id="home-semanas">0</div><div class="stat-label">Semanas ativas</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Esta semana</div>
+    <div class="week-tracker" id="week-tracker"></div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-box-title">⚠️ Importante — Pós-parto</div>
+    <p>Com 3 meses pós-parto, o corpo ainda está em recuperação. <strong>Nunca forças</strong> dor pélvica, pressão abdominal ou perda de urina. Esses são sinais para parar e consultar um fisioterapeuta.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Próximo treino</div>
+    <div id="home-next-treino" style="font-size:0.88rem;color:var(--text-soft);font-weight:600;">Configura o teu plano primeiro ⚙️</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════ CONFIG ══════════════════ -->
+<div class="section" id="sec-config">
+
+  <div class="sec-title">O teu plano</div>
+  <div class="sec-sub">Personaliza para o teu momento atual</div>
 
   <div class="form-group">
-    <label class="form-label">Quantos dias por semana treinas?</label>
+    <label class="form-label">Dias por semana</label>
     <div class="chips" id="chips-days">
       <div class="chip" data-val="2">2 dias</div>
       <div class="chip active" data-val="3">3 dias</div>
       <div class="chip" data-val="4">4 dias</div>
-      <div class="chip" data-val="5">5 dias</div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Duração por sessão: <strong id="dur-label">50 min</strong></label>
-    <div class="slider-wrap">
-      <input type="range" id="dur-slider" min="30" max="90" step="5" value="50">
+    <label class="form-label">Duração por sessão: <span id="dur-label" style="color:var(--primary)">50 min</span></label>
+    <div class="slider-row">
+      <input type="range" id="dur-slider" min="30" max="75" step="5" value="50">
       <span class="slider-val" id="dur-val">50 min</span>
     </div>
   </div>
 
-  <div class="section-label">Foco do treino</div>
-
   <div class="form-group">
-    <label class="form-label">Seleciona tudo o que queres trabalhar</label>
-    <div class="chips" id="chips-focus">
-      <div class="chip active" data-val="core">Core & Abdômen</div>
-      <div class="chip active" data-val="energia">Energia & Bem-estar</div>
-      <div class="chip" data-val="gluteos">Glúteos & Pernas</div>
-      <div class="chip" data-val="superior">Parte Superior</div>
-      <div class="chip" data-val="cardio">Cardio Leve</div>
-    </div>
-  </div>
-
-  <div class="section-label">Como te sentes agora?</div>
-
-  <div class="form-group">
+    <label class="form-label">Como te sentes agora?</label>
     <select id="feel-select">
-      <option value="iniciando">🌱 Iniciando do zero, corpo ainda adaptando</option>
+      <option value="iniciando">🌱 Ainda me estou a adaptar — muito suave</option>
       <option value="leve" selected>🌿 Pronta para movimento leve e progressivo</option>
       <option value="ativa">💪 Recuperei bem, quero progredir</option>
     </select>
   </div>
 
-  <button class="btn-primary" onclick="generatePlan()">Gerar meu plano semanal ✦</button>
+  <div class="form-group">
+    <label class="form-label">Tens diastasia abdominal diagnosticada?</label>
+    <div class="chips" id="chips-diastasia">
+      <div class="chip active" data-val="sim">Sim / Não sei</div>
+      <div class="chip" data-val="nao">Não tenho</div>
+    </div>
+  </div>
+
+  <button class="btn-main" onclick="generatePlan()">Gerar o meu plano semanal ✦</button>
 
 </div>
 
-<!-- VIEW: PLANO -->
-<div class="view" id="view-plano">
-  <button class="btn-secondary" onclick="goBack()">← Ajustar preferências</button>
+<!-- ══════════════════ PLANO ══════════════════ -->
+<div class="section" id="sec-plano">
 
-  <div class="plan-tip">
-    <div class="plan-tip-label">Mensagem do dia</div>
-    <p id="plan-tip-text"></p>
+  <div id="plano-vazio" style="text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:0.9rem;font-weight:600;">
+    Ainda não geraste o teu plano.<br><br>
+    <button class="btn-main" style="width:auto;padding:12px 24px;" onclick="showSection('config',document.querySelectorAll('.nav-btn')[1])">Configurar agora ⚙️</button>
   </div>
 
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-val" id="s-days">3</div><div class="stat-lbl">dias/sem</div></div>
-    <div class="stat-card"><div class="stat-val" id="s-min">50</div><div class="stat-lbl">min/sessão</div></div>
-    <div class="stat-card"><div class="stat-val" id="s-ex">—</div><div class="stat-lbl">exercícios</div></div>
+  <div id="plano-content" style="display:none">
+    <div class="sec-title" id="plano-title">Plano semanal</div>
+    <div class="sec-sub" id="plano-sub"></div>
+    <div id="day-cards"></div>
   </div>
 
-  <div class="week-row">
-    <div class="week-title">Esta semana</div>
-    <div class="week-badge">Semana 1</div>
-  </div>
-
-  <div id="day-cards"></div>
 </div>
 
-<!-- VIEW: EXERCÍCIOS POR ZONA -->
-<div class="view" id="view-exercicios">
+<!-- ══════════════════ HISTÓRICO ══════════════════ -->
+<div class="section" id="sec-historico">
 
-  <div class="section-label" style="margin-top:1.25rem">Basic Fit Terneuzen · Zonas disponíveis</div>
+  <div class="perf-header">
+    <div>
+      <div class="sec-title">Histórico</div>
+      <div class="sec-sub" style="margin-bottom:0">O teu progresso semana a semana</div>
+    </div>
+  </div>
 
-  <div id="zone-list"></div>
+  <div id="historico-content"></div>
+
 </div>
 
-<!-- VIEW: DICAS -->
-<div class="view" id="view-dicas">
+<!-- ══════════════════ DICAS ══════════════════ -->
+<div class="section" id="sec-dicas">
 
-  <div class="section-label" style="margin-top:1.25rem">Pós-parto & academia</div>
+  <div class="sec-title">Guia pós-parto</div>
+  <div class="sec-sub">Treinar de forma inteligente para uma mãe de 3 meses</div>
 
-  <div class="tip-card">
-    <div class="tip-icon">💆‍♀️</div>
-    <div class="tip-title">Antes de começar</div>
-    <p class="tip-text">Aguarda liberação médica completa — geralmente entre 6 a 8 semanas após o parto natural (ou mais para cesariana). Com 3 meses, podes começar com movimentos leves, mas respeita qualquer dor ou desconforto pélvico.</p>
+  <div class="alert-card">
+    <div class="dica-icon">🔴</div>
+    <div class="dica-title">Para imediatamente se sentires...</div>
+    <p class="dica-text">Dor pélvica ou lombar · Sensação de pressão na vagina · Perda de urina durante o esforço · Barriga a fazer "cone" (sinal de diastasia) · Tonturas ou falta de ar excessiva</p>
   </div>
 
-  <div class="tip-card">
-    <div class="tip-icon">🫁</div>
-    <div class="tip-title">Respiração primeiro</div>
-    <p class="tip-text">Em cada exercício, expira no momento de esforço (fase de subida/contração). Nunca prende a respiração — a pressão intra-abdominal pode sobrecarregar o assoalho pélvico ainda em recuperação.</p>
+  <div class="dica-card">
+    <div class="dica-icon">🫁</div>
+    <div class="dica-title">A regra de ouro — respiração</div>
+    <p class="dica-text">Em cada exercício: <strong>expira no esforço</strong> (fase de subida ou contração). Nunca prendes a respiração — a pressão intra-abdominal pode sobrecarregar o assoalho pélvico ainda em recuperação. Isso é mais importante que o peso que usas.</p>
   </div>
 
-  <div class="tip-card">
-    <div class="tip-icon">🔴</div>
-    <div class="tip-title">Sinais para parar</div>
-    <p class="tip-text">Para imediatamente e consulta profissional se sentires: dor pélvica ou lombar, sensação de pressão na vagina, perda de urina durante o exercício, diastasis (separação abdominal) visível. Estes sinais são comuns mas nunca normais para ignorar.</p>
+  <div class="dica-card">
+    <div class="dica-icon">💪</div>
+    <div class="dica-title">Diastasia abdominal</div>
+    <p class="dica-text">A maioria das mães tem algum grau de separação dos retos abdominais. <strong>Nunca</strong> faças crunch, sit-up ou qualquer exercício que faça a barriga fazer "cone". O plano já está adaptado — os exercícios de core são todos de ativação profunda, não de pressão.</p>
   </div>
 
-  <div class="tip-card">
-    <div class="tip-icon">💧</div>
-    <div class="tip-title">Hidratação durante amamentação</div>
-    <p class="tip-text">Se estiveres a amamentar, as necessidades de líquidos aumentam — bebe pelo menos 500ml a mais por dia. A Basic Fit vende Yanga Sports Water na receção.</p>
+  <div class="dica-card">
+    <div class="dica-icon">⏱️</div>
+    <div class="dica-title">Estrutura de cada sessão (50 min)</div>
+    <p class="dica-text"><strong>5 min</strong> — Caminhada na esteira (3–5% inclinação, ritmo confortável)<br><strong>35–40 min</strong> — Treino principal do dia<br><strong>8–10 min</strong> — Stretch Zone: alongamento global e foam roller</p>
   </div>
 
-  <div class="tip-card">
-    <div class="tip-icon">⏱️</div>
-    <div class="tip-title">Estrutura ideal da sessão (50 min)</div>
-    <p class="tip-text">
-      <strong>5 min</strong> — Aquecimento na esteira (ritmo leve)<br>
-      <strong>35 min</strong> — Treino principal (ver plano)<br>
-      <strong>10 min</strong> — Alongamento na Stretch Zone
+  <div class="dica-card">
+    <div class="dica-icon">🗓️</div>
+    <div class="dica-title">Estrutura dos dias (sem misturar)</div>
+    <p class="dica-text">
+      <strong>Dia A</strong> — Core & Assoalho Pélvico (prioridade máxima pós-parto)<br>
+      <strong>Dia B</strong> — Glúteos & Pernas (músculos grandes, queima calorias, dá energia)<br>
+      <strong>Dia C</strong> — Cardio + Mobilidade geral<br>
+      <strong>Dia D (se 4 dias)</strong> — Parte superior leve + core de reforço
     </p>
   </div>
 
-  <div class="section-label">Nutrição de suporte</div>
+  <div class="dica-card">
+    <div class="dica-icon">💧</div>
+    <div class="dica-title">Hidratação (especialmente a amamentar)</div>
+    <p class="dica-text">Bebe pelo menos <strong>+500ml</strong> por dia extra se estiveres a amamentar. O treino aumenta ainda mais essa necessidade. A Basic Fit tem Yanga Sports Water na receção.</p>
+  </div>
 
-  <div class="nutrition-row">
-    <div class="nutrition-card">
-      <div class="nutrition-label">Proteína</div>
-      <div class="nutrition-val">~1.6g</div>
-      <div class="nutrition-desc">por kg de peso corporal/dia</div>
-    </div>
-    <div class="nutrition-card">
-      <div class="nutrition-label">Calorias extra</div>
-      <div class="nutrition-val">+200</div>
-      <div class="nutrition-desc">kcal se amamentando</div>
-    </div>
-    <div class="nutrition-card">
-      <div class="nutrition-label">Ferro</div>
-      <div class="nutrition-val">18mg</div>
-      <div class="nutrition-desc">Essencial pós-parto</div>
-    </div>
-    <div class="nutrition-card">
-      <div class="nutrition-label">Vitamina D</div>
-      <div class="nutrition-val">800 UI</div>
-      <div class="nutrition-desc">Especialmente na Holanda</div>
+  <div class="card">
+    <div class="card-title">Nutrição de suporte</div>
+    <div class="nutri-grid">
+      <div class="nutri-item"><div class="nutri-val">~1.6g</div><div class="nutri-label">Proteína</div><div class="nutri-desc">por kg/dia</div></div>
+      <div class="nutri-item"><div class="nutri-val">+200</div><div class="nutri-label">Calorias</div><div class="nutri-desc">se amamentando</div></div>
+      <div class="nutri-item"><div class="nutri-val">18mg</div><div class="nutri-label">Ferro</div><div class="nutri-desc">essencial pós-parto</div></div>
+      <div class="nutri-item"><div class="nutri-val">800UI</div><div class="nutri-label">Vitamina D</div><div class="nutri-desc">crucial na Holanda</div></div>
     </div>
   </div>
 
 </div>
 
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <button class="nav-btn active" onclick="showView('config',this)">
-    <div class="nav-icon">⚙️</div>Configurar
-  </button>
-  <button class="nav-btn" onclick="showView('plano',this)">
-    <div class="nav-icon">📅</div>Plano
-  </button>
-  <button class="nav-btn" onclick="showView('exercicios',this)">
-    <div class="nav-icon">🏋️</div>Exercícios
-  </button>
-  <button class="nav-btn" onclick="showView('dicas',this)">
-    <div class="nav-icon">💡</div>Dicas
-  </button>
-</div>
+</div><!-- /main -->
 
 <script>
-// ─────────────────────────────────────────────
-// DATA
-// ─────────────────────────────────────────────
-const TIPS = {
-  iniciando: "Cada treino é uma vitória. Não precisas fazer muito — precisas aparecer. O corpo vai agradecer cada movimento gentil.",
-  leve: "Estás a reconstruir, não a começar do zero. Usa o que conheces, respeita o tempo de recuperação e progride no teu ritmo.",
-  ativa: "Tens base e tens motivação — ótima combinação. Foca na técnica antes de adicionar carga. Resultados duradouros constroem-se com paciência."
+// ══════════════════════════════════════════════════
+// DATA — EXERCÍCIOS ORGANIZADOS POR DIA
+// ══════════════════════════════════════════════════
+const PLAN_TYPES = {
+  // DIA A: Core & Assoalho Pélvico (PRIORIDADE — pós-parto/diastasia)
+  A: {
+    label: "Core & Assoalho Pélvico",
+    emoji: "🌿",
+    color: "#1D9E75",
+    exercises: [
+      { name:"Respiração diafragmática com ativação", zone:"Stretch Zone", detail:"3 × 10 respirações profundas", tip:"O exercício mais importante: inspira expandindo a barriga, expira ativando o assoalho pélvico (como se quisesses parar de fazer xixi)", ytId:"ri2PVQNT9mQ" },
+      { name:"Dead bug", zone:"Stretch Zone", detail:"3 × 8 rep cada lado", tip:"Lombar SEMPRE colada no chão. Nunca deixa a barriga fazer cone — para imediatamente se isso acontecer", ytId:"g_BYB0R-4Ws" },
+      { name:"Bird-dog", zone:"Stretch Zone", detail:"3 × 10 rep cada lado", tip:"Costas neutras, movimento lento. Ativa o core profundo antes de mover os membros", ytId:"wiFNA3sqjCA" },
+      { name:"Prancha lateral (joelhos no chão)", zone:"Stretch Zone", detail:"3 × 15–20 seg cada lado", tip:"Versão modificada — joelhos dobrados para reduzir pressão abdominal. Progride para pés quando te sentires pronta", ytId:"_6vj5H4Pcqs" },
+      { name:"Ponte glútea (assoalho pélvico)", zone:"Stretch Zone", detail:"3 × 12 rep", tip:"No topo: aperta o glúteo E ativa o assoalho pélvico ao mesmo tempo. Não empurra a lombar para cima", ytId:"OUgsJ8-Vi0E" },
+    ]
+  },
+  // DIA B: Glúteos & Pernas (força, energia, metabolismo)
+  B: {
+    label: "Glúteos & Pernas",
+    emoji: "🍑",
+    color: "#e8856a",
+    exercises: [
+      { name:"Hip thrust (haltere ou máquina)", zone:"Free Weight Zone", detail:"4 × 12 rep — começa sem peso, adiciona aos poucos", tip:"Costas apoiadas no banco, queixo levemente para baixo. Expira no topo. Excelente para recuperar glúteo pós-parto", ytId:"LM8XHLYJoYs" },
+      { name:"Agachamento goblet (kettlebell)", zone:"Functional Zone", detail:"3 × 12 rep", tip:"Kettlebell à frente no peito. Joelhos seguem a direção dos pés, desce controlada. Ótimo para reativar padrão de agachamento", ytId:"MeIiIdhvXT4" },
+      { name:"Passada reversa (peso corporal)", zone:"Free Weight Zone", detail:"3 × 10 rep cada perna", tip:"Passada para TRÁS — muito menos impacto que a clássica. Perfeita para pós-parto. Mantém o tronco ereto", ytId:"csN1-_l3hvo" },
+      { name:"Abdução com elástico (lateral walk)", zone:"Functional Zone", detail:"3 × 15 passos cada lado", tip:"Elástico acima dos joelhos. Não deixa os joelhos colapsarem para dentro. Ativa glúteo médio — crucial para estabilidade pélvica", ytId:"dqfXJbxzfxo" },
+      { name:"Leg press (pés altos na plataforma)", zone:"Strength Zone", detail:"3 × 15 rep, carga leve a moderada", tip:"Pés na parte alta da plataforma = mais ativação glútea. Não bloqueia os joelhos no topo. Expira ao empurrar", ytId:"IZxyjW7MPJQ" },
+    ]
+  },
+  // DIA C: Cardio + Mobilidade (energia, humor, bem-estar)
+  C: {
+    label: "Cardio & Mobilidade",
+    emoji: "⚡",
+    color: "#5DCAA5",
+    exercises: [
+      { name:"Caminhada na esteira (inclinação progressiva)", zone:"Cardio Zone", detail:"15 min: começa a 4%, vai aumentando até 8%", tip:"Mantém FC confortável — deve conseguir falar. O incline walking é excelente para glúteos sem impacto", ytId:"YgVFCd8q1T4" },
+      { name:"Bicicleta ergométrica (ritmo moderado)", zone:"Cardio Zone", detail:"10 min, FC ≤ 130 bpm", tip:"Zero impacto articular — perfeito para pós-parto. Cadência confortável, resistência leve", ytId:"wD5kBCaQ_sk" },
+      { name:"Elíptico (resistência 2–3)", zone:"Cardio Zone", detail:"8–10 min contínuos", tip:"Treino completo de corpo todo sem impacto. Ótimo para cardio suave e condicionamento geral", ytId:"QXMB4PLxxCM" },
+      { name:"Foam roller costas e glúteos", zone:"Stretch Zone", detail:"5 min — 30 seg em cada zona", tip:"Rola devagar, para nos pontos mais tensos. Costas superiores, médias, glúteos. Recuperação essencial", ytId:"QLN9_oixDrY" },
+      { name:"Alongamento hip flexor (corredor)", zone:"Stretch Zone", detail:"3 × 30 seg cada lado", tip:"Posição de corredor no chão. Hip flexors ficam encurtados a carregar o bebé. Essencial para postura", ytId:"PJrOG7lfyT0" },
+    ]
+  },
+  // DIA D: Parte superior LEVE (adaptado pós-parto — foco funcional)
+  D: {
+    label: "Parte Superior (leve)",
+    emoji: "💪",
+    color: "#9b7ec8",
+    exercises: [
+      { name:"Remada com haltere (unilateral)", zone:"Free Weight Zone", detail:"3 × 12 rep cada braço, peso leve", tip:"Costas planas, cotovelo rente ao corpo. Essencial para postura — amamentar encurva muito as costas", ytId:"roCP442LA5w" },
+      { name:"Puxada no cabo (lat pulldown) — pega larga", zone:"Strength Zone", detail:"3 × 12 rep, carga confortável", tip:"Puxa para o peito, não para trás da cabeça. Expira ao puxar. Fortalece as costas para carregar o Miguel", ytId:"CAwf7n6Tk6c" },
+      { name:"Rosca direta com haltere", zone:"Free Weight Zone", detail:"3 × 12 rep, peso leve", tip:"Bíceps forte = segurar o bebé com muito mais facilidade! Cotovelos fixos nos flancos", ytId:"in7PaeYlhrg" },
+      { name:"Extensão de tríceps no cabo", zone:"Strength Zone", detail:"3 × 12 rep", tip:"Cotovelos junto ao corpo, expira ao estender. Complementa o bíceps para força funcional nos braços", ytId:"2-LAMcpzODU" },
+      { name:"Prancha isométrica (variação curta)", zone:"Stretch Zone", detail:"3 × 20 seg — aumenta 5 seg por semana", tip:"ATENÇÃO: para se a barriga fizer cone. Respira normalmente, não bloqueia. Versão curta e segura para pós-parto", ytId:"pSHjTRCQxIw" },
+    ]
+  }
+};
+
+const DAY_SEQUENCES = {
+  2: ["A","B"],
+  3: ["A","B","C"],
+  4: ["A","B","C","D"]
 };
 
 const WEEKDAYS = ["Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"];
+const WEEKDAYS_SHORT = ["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"];
 
-const EXERCISES = {
-  core: [
-    {
-      name: "Prancha isométrica",
-      zone: "Functional Zone",
-      detail: "3 séries × 20–30 seg",
-      tip: "🌿 Ativa o assoalho pélvico ao subir — nunca segures a respiração",
-      ytId: "pSHjTRCQxIw"
-    },
-    {
-      name: "Bird-dog",
-      zone: "Stretch Zone",
-      detail: "3 séries × 10 rep cada lado",
-      tip: "🌿 Costas neutras, movimento lento e controlado",
-      ytId: "wiFNA3sqjCA"
-    },
-    {
-      name: "Dead bug",
-      zone: "Stretch Zone",
-      detail: "3 séries × 8 rep cada lado",
-      tip: "🌿 Lombar sempre colada no chão, não arqueia",
-      ytId: "g_BYB0R-4Ws"
-    },
-    {
-      name: "Ponte glútea",
-      zone: "Stretch Zone",
-      detail: "3 séries × 12 rep",
-      tip: "🌿 Aperta o glúteo no topo, não empurra a lombar",
-      ytId: "OUgsJ8-Vi0E"
-    },
-    {
-      name: "Respiração diafragmática ativa",
-      zone: "Stretch Zone",
-      detail: "2 séries × 10 respirações profundas",
-      tip: "🌿 O exercício mais importante do pós-parto",
-      ytId: "ri2PVQNT9mQ"
-    }
-  ],
-  energia: [
-    {
-      name: "Caminhada na esteira (inclinação 5%)",
-      zone: "Cardio Zone",
-      detail: "10–12 min contínuos, 5–6 km/h",
-      tip: "⚡ Eleva o humor via endorfinas, sem impacto excessivo",
-      ytId: "blH募HmbPg0"
-    },
-    {
-      name: "Bicicleta ergométrica (ritmo moderado)",
-      zone: "Cardio Zone",
-      detail: "10 min, FC ≤ 130 bpm",
-      tip: "⚡ Zero impacto articular — perfeito para recomeçar",
-      ytId: "wD5kBCaQ_sk"
-    },
-    {
-      name: "Elíptico (resistência 2–3)",
-      zone: "Cardio Zone",
-      detail: "10 min contínuos",
-      tip: "⚡ Treino completo de corpo todo sem impacto",
-      ytId: "QXMB4PLxxCM"
-    },
-    {
-      name: "Agachamento livre (peso corporal)",
-      zone: "Free Weight Zone",
-      detail: "3 séries × 15 rep",
-      tip: "⚡ Pés alinhados com quadril, joelhos seguem os pés",
-      ytId: "xqvCmoLULNY"
-    }
-  ],
-  gluteos: [
-    {
-      name: "Hip thrust com haltere",
-      zone: "Free Weight Zone",
-      detail: "4 séries × 12 rep",
-      tip: "🍑 Costas no banco, haltere no quadril — avança o peso semanalmente",
-      ytId: "LM8XHLYJoYs"
-    },
-    {
-      name: "Abdução com elástico (lateral walk)",
-      zone: "Functional Zone",
-      detail: "3 séries × 15 passos cada lado",
-      tip: "🍑 Elástico acima dos joelhos, postura ereta",
-      ytId: "dqfXJbxzfxo"
-    },
-    {
-      name: "Passada reversa",
-      zone: "Free Weight Zone",
-      detail: "3 séries × 10 rep cada perna",
-      tip: "🍑 Menos impacto que a passada à frente — ótimo para iniciantes",
-      ytId: "csN1-_l3hvo"
-    },
-    {
-      name: "Leg press (carga leve)",
-      zone: "Strength Zone",
-      detail: "3 séries × 15 rep",
-      tip: "🍑 Pés altos na plataforma = mais ativação glútea",
-      ytId: "IZxyjW7MPJQ"
-    }
-  ],
-  superior: [
-    {
-      name: "Remada com haltere (unilateral)",
-      zone: "Free Weight Zone",
-      detail: "3 séries × 12 rep cada braço",
-      tip: "💪 Costas planas, cotovelo rente ao corpo",
-      ytId: "roCP442LA5w"
-    },
-    {
-      name: "Supino com halteres (leve)",
-      zone: "Free Weight Zone",
-      detail: "3 séries × 12 rep",
-      tip: "💪 Começa com 4–5 kg, foco na conexão com o músculo",
-      ytId: "VmB1G1K7v94"
-    },
-    {
-      name: "Desenvolvimento ombros",
-      zone: "Free Weight Zone",
-      detail: "3 séries × 10 rep",
-      tip: "💪 Cotovelos a 90° na base, não eleva os ombros",
-      ytId: "HzIiNhHhhtA"
-    },
-    {
-      name: "Rosca direta com haltere",
-      zone: "Free Weight Zone",
-      detail: "3 séries × 12 rep",
-      tip: "💪 Bíceps forte = segurar o Miguel com mais facilidade!",
-      ytId: "in7PaeYlhrg"
-    }
-  ],
-  cardio: [
-    {
-      name: "Intervalo na esteira (caminhada/trote)",
-      zone: "Cardio Zone",
-      detail: "10 min: 2 min caminhada + 1 min trote leve × 3",
-      tip: "🏃 Só trote após 8–10 semanas com liberação médica",
-      ytId: "YgVFCd8q1T4"
-    },
-    {
-      name: "Rowing machine (remada)",
-      zone: "Cardio Zone",
-      detail: "8 min contínuos, ritmo confortável",
-      tip: "🏃 Excelente para costas e core — técnica: empurra com as pernas primeiro",
-      ytId: "7S4JYbRj0Vs"
-    }
-  ]
+const FEEL_MSGS = {
+  iniciando: "Foco total na qualidade do movimento, não na quantidade. O corpo agradece a paciência. 🌱",
+  leve: "Progresso gentil é progresso real. A cada semana o teu corpo vai surpreender-te. 🌿",
+  ativa: "Tens base e motivação — usa-as com inteligência. Técnica primeiro, carga depois. 💪"
 };
 
-const ZONES = [
-  {
-    icon: "🚴",
-    name: "Cardio Zone",
-    desc: "Esteiras · Bikes · Elípticos · Rowing (equipamentos Matrix)",
-    exercises: ["Caminhada na esteira (5% inclinação)", "Bicicleta ergométrica", "Elíptico (resistência 2–3)", "Rowing machine", "Virtual cycling"]
-  },
-  {
-    icon: "🏋️",
-    name: "Strength Zone",
-    desc: "Máquinas guiadas com cabos e pesos — informação muscular em cada aparelho",
-    exercises: ["Leg press", "Leg extension", "Leg curl", "Cabo para costas (lat pulldown)", "Polia para ombros e braços"]
-  },
-  {
-    icon: "🪨",
-    name: "Free Weight Zone",
-    desc: "Halteres · Barras · Kettlebells · Anilhas — treino livre e funcional",
-    exercises: ["Agachamento com halteres", "Hip thrust com haltere", "Remada unilateral", "Supino com halteres", "Desenvolvimento ombros", "Rosca direta"]
-  },
-  {
-    icon: "⚡",
-    name: "Functional Zone",
-    desc: "Rack funcional · Slam balls · Plyo boxes · Elásticos · Kettlebells",
-    exercises: ["Prancha isométrica", "Abdução com elástico", "Kettlebell swing (após semana 6)", "TRX (após semana 4)", "Caixa de step"]
-  },
-  {
-    icon: "🧘",
-    name: "Stretch Zone",
-    desc: "Tapetes · Rolo de espuma · Área de mobilidade e recuperação",
-    exercises: ["Bird-dog", "Dead bug", "Ponte glútea", "Respiração diafragmática", "Foam roller glúteo e costas", "Hip flexor stretch"]
-  }
-];
+// ══════════════════════════════════════════════════
+// STATE (localStorage)
+// ══════════════════════════════════════════════════
+function saveState(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+function loadState(key, def){ try{ const v=localStorage.getItem(key); return v?JSON.parse(v):def; }catch(e){ return def; } }
 
-// ─────────────────────────────────────────────
-// STATE
-// ─────────────────────────────────────────────
-let cfg = { days: 3, dur: 50, focus: ["core","energia"], feel: "leve" };
-let planGenerated = false;
+let cfg = loadState("cfg", { days:3, dur:50, feel:"leve", diastasia:"sim" });
+let planData = loadState("planData", null);
+let checks = loadState("checks", {});   // { "YYYY-MM-DD_exIdx": true }
+let pesos = loadState("pesos", {});     // { "exName": "5kg" }
+let dayDone = loadState("dayDone", {}); // { "YYYY-MM-DD": true }
 
-// ─────────────────────────────────────────────
+// ══════════════════════════════════════════════════
 // INIT
-// ─────────────────────────────────────────────
+// ══════════════════════════════════════════════════
 document.addEventListener("DOMContentLoaded", () => {
-  buildZones();
+  // Restore config UI
+  setChip("chips-days", String(cfg.days));
+  setChip("chips-diastasia", cfg.diastasia);
+  document.getElementById("dur-slider").value = cfg.dur;
+  document.getElementById("dur-val").textContent = cfg.dur + " min";
+  document.getElementById("dur-label").textContent = cfg.dur + " min";
+  document.getElementById("feel-select").value = cfg.feel;
 
+  chipGroup("chips-days", false, vals => { cfg.days=parseInt(vals[0]); saveState("cfg",cfg); });
+  chipGroup("chips-diastasia", false, vals => { cfg.diastasia=vals[0]; saveState("cfg",cfg); });
   document.getElementById("dur-slider").addEventListener("input", function(){
     cfg.dur = parseInt(this.value);
-    document.getElementById("dur-val").textContent = cfg.dur + " min";
-    document.getElementById("dur-label").textContent = cfg.dur + " min";
+    document.getElementById("dur-val").textContent = cfg.dur+" min";
+    document.getElementById("dur-label").textContent = cfg.dur+" min";
+    saveState("cfg",cfg);
   });
+  document.getElementById("feel-select").addEventListener("change", function(){ cfg.feel=this.value; saveState("cfg",cfg); });
 
-  chipGroup("chips-days", false, vals => cfg.days = parseInt(vals[0]));
-  chipGroup("chips-focus", true, vals => cfg.focus = vals);
-  document.getElementById("feel-select").addEventListener("change", function(){ cfg.feel = this.value; });
+  buildHome();
+  if(planData) renderPlan();
+  buildHistorico();
 });
 
-function chipGroup(id, multi, onChange) {
-  document.querySelectorAll("#" + id + " .chip").forEach(c => {
+// ══════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════
+function showSection(name, btn) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.getElementById("sec-"+name).classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  window.scrollTo(0,0);
+  if(name==="historico") buildHistorico();
+  if(name==="home") buildHome();
+}
+
+// ══════════════════════════════════════════════════
+// CHIP HELPERS
+// ══════════════════════════════════════════════════
+function setChip(id, val){
+  document.querySelectorAll("#"+id+" .chip").forEach(c => {
+    c.classList.toggle("active", c.dataset.val===val);
+  });
+}
+function chipGroup(id, multi, onChange){
+  document.querySelectorAll("#"+id+" .chip").forEach(c => {
     c.addEventListener("click", function(){
-      if(!multi) {
-        document.querySelectorAll("#" + id + " .chip").forEach(x => x.classList.remove("active"));
+      if(!multi){
+        document.querySelectorAll("#"+id+" .chip").forEach(x=>x.classList.remove("active"));
         this.classList.add("active");
       } else {
         this.classList.toggle("active");
-        const any = document.querySelector("#" + id + " .chip.active");
-        if(!any) this.classList.add("active");
+        if(!document.querySelector("#"+id+" .chip.active")) this.classList.add("active");
       }
-      const active = Array.from(document.querySelectorAll("#" + id + " .chip.active")).map(x => x.dataset.val);
-      onChange(active);
+      onChange(Array.from(document.querySelectorAll("#"+id+" .chip.active")).map(x=>x.dataset.val));
     });
   });
 }
 
-// ─────────────────────────────────────────────
-// NAVIGATION
-// ─────────────────────────────────────────────
-function showView(name, btn) {
-  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
-  document.getElementById("view-" + name).classList.add("active");
-  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-  if(btn) btn.classList.add("active");
-  window.scrollTo(0, 0);
+// ══════════════════════════════════════════════════
+// HOME
+// ══════════════════════════════════════════════════
+function buildHome(){
+  // Week tracker
+  const today = new Date();
+  const dow = (today.getDay()+6)%7; // Mon=0
+  const tracker = document.getElementById("week-tracker");
+  tracker.innerHTML = WEEKDAYS_SHORT.map((d,i) => {
+    const diff = i - dow;
+    const dt = new Date(today); dt.setDate(dt.getDate()+diff);
+    const key = fmtDate(dt);
+    const isDone = dayDone[key];
+    const isToday = diff===0;
+    return `<div class="wk-day">
+      <div class="wk-name">${d}</div>
+      <div class="wk-dot${isDone?" done":""}${isToday?" today":""}">${isDone?"✓":""}</div>
+    </div>`;
+  }).join("");
+
+  // Stats
+  const allDone = Object.values(dayDone).filter(Boolean).length;
+  const allChecks = Object.values(checks).filter(Boolean).length;
+  const weeks = allDone>0 ? Math.ceil(allDone/3) : 0;
+  document.getElementById("home-treinos").textContent = allDone;
+  document.getElementById("home-exercicios").textContent = allChecks;
+  document.getElementById("home-semanas").textContent = weeks;
+
+  // Streak
+  let streak = 0;
+  for(let i=0;i<30;i++){
+    const dt = new Date(today); dt.setDate(dt.getDate()-i);
+    if(dayDone[fmtDate(dt)]) streak++; else break;
+  }
+  document.getElementById("streak-num").textContent = streak;
+
+  // Next treino
+  if(planData){
+    const todayDow = (today.getDay()+6)%7;
+    const trainDows = planData.map(d=>d.dow);
+    let nextDow = trainDows.find(d=>d>=todayDow) || trainDows[0];
+    const nextDay = planData.find(d=>d.dow===nextDow);
+    if(nextDay){
+      const todayKey = fmtDate(today);
+      const done = dayDone[todayKey] && nextDow===todayDow;
+      document.getElementById("home-next-treino").innerHTML =
+        `<strong>${WEEKDAYS[nextDow]}</strong> — ${nextDay.typeEmoji} ${nextDay.typeLabel}${done?" <span style='color:var(--primary)'>✓ Feito hoje!</span>":""}`;
+    }
+  }
 }
 
-function goBack() {
-  showView("config", document.querySelector(".nav-btn:first-child"));
+// ══════════════════════════════════════════════════
+// GENERATE PLAN
+// ══════════════════════════════════════════════════
+function generatePlan(){
+  const seq = DAY_SEQUENCES[cfg.days] || DAY_SEQUENCES[3];
+  // Spread training days across the week
+  const trainDows = cfg.days===2?[0,3]:cfg.days===3?[0,2,4]:cfg.days===4?[0,1,3,4]:[0,2,4,6];
+
+  planData = trainDows.map((dow,i) => ({
+    dow: dow,
+    dayType: seq[i],
+    typeLabel: PLAN_TYPES[seq[i]].label,
+    typeEmoji: PLAN_TYPES[seq[i]].emoji,
+    typeColor: PLAN_TYPES[seq[i]].color,
+    exercises: PLAN_TYPES[seq[i]].exercises
+  }));
+
+  saveState("planData", planData);
+  renderPlan();
+  showSection("plano", document.querySelectorAll(".nav-btn")[2]);
 }
 
-// ─────────────────────────────────────────────
-// PLAN GENERATION
-// ─────────────────────────────────────────────
-function generatePlan() {
-  cfg.feel = document.getElementById("feel-select").value;
+// ══════════════════════════════════════════════════
+// RENDER PLAN
+// ══════════════════════════════════════════════════
+function renderPlan(){
+  const planoVazio = document.getElementById("plano-vazio");
+  const planoContent = document.getElementById("plano-content");
+  planoVazio.style.display = "none";
+  planoContent.style.display = "block";
 
-  document.getElementById("plan-tip-text").textContent = TIPS[cfg.feel];
-  document.getElementById("s-days").textContent = cfg.days;
-  document.getElementById("s-min").textContent = cfg.dur;
+  document.getElementById("plano-sub").textContent = FEEL_MSGS[cfg.feel];
 
-  const trainIdx = getTrainDays(cfg.days);
-  let totalEx = 0;
-  const html = WEEKDAYS.map((day, i) => {
-    if(!trainIdx.includes(i)) {
+  const today = new Date();
+  const todayDow = (today.getDay()+6)%7;
+  const todayKey = fmtDate(today);
+
+  // Build full week: rest days + train days
+  const weekDays = WEEKDAYS.map((dayName,i) => {
+    const trainDay = planData.find(d=>d.dow===i);
+    if(!trainDay) return { name:dayName, dow:i, rest:true };
+    return { name:dayName, dow:i, rest:false, ...trainDay };
+  });
+
+  const cardsHtml = weekDays.map((day,i) => {
+    // get the date for this day this week
+    const diff = day.dow - todayDow;
+    const dt = new Date(today); dt.setDate(dt.getDate()+diff);
+    const dateKey = fmtDate(dt);
+    const isToday = day.dow === todayDow;
+    const isDone = !!dayDone[dateKey];
+
+    if(day.rest){
       return `<div class="day-card">
         <div class="day-header">
           <div class="day-dot rest"></div>
           <div class="day-info">
-            <div class="day-name">${day}</div>
+            <div class="day-name">${day.name}${isToday?' <span style="font-size:0.65rem;background:var(--warn-light);color:var(--warn);padding:2px 8px;border-radius:20px;font-weight:800">Hoje</span>':''}</div>
             <div class="day-meta">Descanso ativo</div>
           </div>
         </div>
-        <div class="rest-msg" style="padding:0 1.25rem 1rem;">Caminhada leve, alongamento em casa ou simplesmente descansa — tudo conta 🌿</div>
+        <div class="rest-msg">Caminhada leve, alongamento em casa ou simplesmente descansar. O descanso é parte do treino 🌿</div>
       </div>`;
     }
 
-    const exs = pickExercises(cfg.focus, cfg.dur);
-    totalEx += exs.length;
-    const exHtml = exs.map((ex, ei) => `
-      <div class="ex-item">
-        <div class="ex-header">
+    const exHtml = day.exercises.map((ex,ei) => {
+      const ck = `${dateKey}_${ei}`;
+      const isChecked = !!checks[ck];
+      const prevPeso = pesos[ex.name] || "";
+      return `<div class="ex-item" id="exitem-${dateKey}-${ei}">
+        <div class="ex-top">
           <div class="ex-name">${ex.name}</div>
-          <div class="ex-zone">${ex.zone}</div>
+          <div class="ex-zone-tag">${ex.zone}</div>
         </div>
         <div class="ex-detail">${ex.detail}</div>
         <div class="ex-tip">${ex.tip}</div>
-        <br>
-        <button class="video-toggle" onclick="toggleVideo('vid-${i}-${ei}')">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#185FA5"/><polygon points="5.5,4.5 10,7 5.5,9.5" fill="#185FA5"/></svg>
-          Ver demonstração em vídeo
+        <div class="peso-row">
+          <span class="peso-label">⚖️ Peso usado:</span>
+          <input class="peso-input" type="text" inputmode="decimal" placeholder="—" value="${prevPeso}"
+            onchange="savePeso('${ex.name}',this.value)"
+            oninput="savePeso('${ex.name}',this.value)">
+          <span class="peso-unit">kg</span>
+          ${prevPeso?`<span class="peso-prev">✓ última vez: ${prevPeso}kg</span>`:''}
+        </div>
+        <div class="check-row">
+          <div class="ex-check${isChecked?' checked':''}" onclick="toggleCheck('${ck}','${dateKey}',${ei})" id="ck-${ck}">${isChecked?'✓':''}</div>
+          <span class="check-label">${isChecked?'Exercício feito!':'Marcar como feito'}</span>
+        </div>
+        <button class="video-btn" onclick="toggleVideo('vid-${dateKey}-${ei}')">
+          ▶ Ver demonstração em vídeo
         </button>
-        <div class="video-container" id="vid-${i}-${ei}">
-          <iframe
-            src="about:blank"
-            data-src="https://www.youtube.com/embed/${ex.ytId}?rel=0&modestbranding=1"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
+        <div class="video-wrap" id="vid-${dateKey}-${ei}">
+          <iframe src="about:blank" data-src="https://www.youtube.com/embed/${ex.ytId}?rel=0&modestbranding=1"
+            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
         </div>
-      </div>`).join("");
+      </div>`;
+    }).join("");
 
-    return `<div class="day-card" id="day-${i}">
-      <div class="day-header" onclick="toggleDay(${i})">
-        <div class="day-dot"></div>
+    return `<div class="day-card${isDone?" open":""}" id="daycard-${dateKey}">
+      <div class="day-header" onclick="toggleDay('${dateKey}')">
+        <div class="day-dot${isDone?" done":""}"></div>
         <div class="day-info">
-          <div class="day-name">${day}</div>
-          <div class="day-meta">Treino · ${cfg.dur} min · ${exs.length} exercícios</div>
+          <div class="day-name">${day.name}${isToday?' <span style="font-size:0.65rem;background:var(--warn-light);color:var(--warn);padding:2px 8px;border-radius:20px;font-weight:800">Hoje</span>':''}</div>
+          <div class="day-meta">${day.typeEmoji} ${day.typeLabel} · ${cfg.dur} min · ${day.exercises.length} exercícios</div>
         </div>
+        <div class="day-badge${isDone?" done-badge":""}">${isDone?"✓ Feito":day.dayType}</div>
         <div class="day-chevron">▶</div>
       </div>
       <div class="day-body">
-        <div class="warmup-note">
-          <strong>Aquecimento (5 min):</strong> Caminhada na esteira, inclinação 3–5%, velocidade confortável. Ativa o corpo antes de pegar nos pesos.
-        </div>
+        <div class="warmup-strip">🔥 Aquecimento: 5 min na esteira, inclinação 3–5%, ritmo confortável de conversa</div>
         ${exHtml}
+        <button class="done-btn${isDone?" marked":""}" onclick="markDayDone('${dateKey}')">
+          ${isDone?"✅ Treino concluído — Boa trabalho!":"🏁 Marcar dia como concluído"}
+        </button>
       </div>
     </div>`;
   }).join("");
 
-  document.getElementById("s-ex").textContent = totalEx;
-  document.getElementById("day-cards").innerHTML = html;
-  planGenerated = true;
-
-  showView("plano", document.querySelectorAll(".nav-btn")[1]);
+  document.getElementById("day-cards").innerHTML = cardsHtml;
 }
 
-function getTrainDays(n) {
-  const patterns = {
-    2: [0,3],
-    3: [0,2,4],
-    4: [0,1,3,4],
-    5: [0,1,2,3,4]
-  };
-  return patterns[n] || [0,2,4];
-}
-
-function pickExercises(focusArr, dur) {
-  let pool = [];
-  focusArr.forEach(f => { if(EXERCISES[f]) pool = pool.concat(EXERCISES[f]); });
-  // shuffle
-  for(let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  const count = dur <= 40 ? 4 : dur <= 60 ? 5 : 6;
-  const seen = new Set();
-  return pool.filter(ex => {
-    if(seen.has(ex.name)) return false;
-    seen.add(ex.name);
-    return true;
-  }).slice(0, count);
-}
-
-// ─────────────────────────────────────────────
+// ══════════════════════════════════════════════════
 // INTERACTIONS
-// ─────────────────────────────────────────────
-function toggleDay(idx) {
-  const card = document.getElementById("day-" + idx);
-  card.classList.toggle("open");
+// ══════════════════════════════════════════════════
+function toggleDay(dateKey){
+  const card = document.getElementById("daycard-"+dateKey);
+  if(card) card.classList.toggle("open");
 }
 
-function toggleVideo(id) {
-  const container = document.getElementById(id);
-  const iframe = container.querySelector("iframe");
-  if(!container.classList.contains("open")) {
-    container.classList.add("open");
-    const src = iframe.dataset.src;
-    if(iframe.src !== src) iframe.src = src;
+function toggleCheck(ck, dateKey, ei){
+  checks[ck] = !checks[ck];
+  saveState("checks", checks);
+  const el = document.getElementById("ck-"+ck);
+  if(el){
+    el.classList.toggle("checked", checks[ck]);
+    el.textContent = checks[ck]?"✓":"";
+    el.nextElementSibling.textContent = checks[ck]?"Exercício feito!":"Marcar como feito";
+  }
+  buildHome();
+}
+
+function savePeso(exName, val){
+  if(val && val.trim()) pesos[exName] = val.trim();
+  else delete pesos[exName];
+  saveState("pesos", pesos);
+}
+
+function markDayDone(dateKey){
+  dayDone[dateKey] = !dayDone[dateKey];
+  saveState("dayDone", dayDone);
+  renderPlan();
+  buildHome();
+}
+
+function toggleVideo(id){
+  const wrap = document.getElementById(id);
+  if(!wrap) return;
+  const iframe = wrap.querySelector("iframe");
+  if(!wrap.classList.contains("open")){
+    wrap.classList.add("open");
+    if(iframe.src==="about:blank") iframe.src = iframe.dataset.src;
   } else {
-    container.classList.remove("open");
+    wrap.classList.remove("open");
     iframe.src = "about:blank";
   }
 }
 
-function buildZones() {
-  const html = ZONES.map((z, zi) => `
-    <div class="zone-section" id="zone-${zi}">
-      <div class="zone-header" onclick="toggleZone(${zi})">
-        <div class="zone-icon">${z.icon}</div>
-        <div class="zone-info">
-          <div class="zone-name">${z.name}</div>
-          <div class="zone-desc">${z.desc}</div>
-        </div>
-        <div class="zone-chevron">▶</div>
-      </div>
-      <div class="zone-exercises">
-        ${z.exercises.map(ex => `
-          <div class="zone-ex-card">
-            <div class="zone-ex-name">${ex}</div>
-            <div class="zone-ex-detail" style="font-size:12px;color:var(--text3);">Disponível na ${z.name}</div>
-          </div>`).join("")}
-      </div>
-    </div>`).join("");
-  document.getElementById("zone-list").innerHTML = html;
+// ══════════════════════════════════════════════════
+// HISTÓRICO
+// ══════════════════════════════════════════════════
+function buildHistorico(){
+  const container = document.getElementById("historico-content");
+  const today = new Date();
+
+  // Build last 4 weeks of data
+  let html = "";
+  let hasAny = false;
+
+  for(let w=0; w<4; w++){
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - today.getDay() + 1 - w*7); // Monday
+    const weekLabel = w===0?"Esta semana":w===1?"Semana passada":`Há ${w} semanas`;
+
+    let weekHtml = "";
+    let weekHasData = false;
+
+    if(planData){
+      planData.forEach(trainDay => {
+        const dt = new Date(weekStart);
+        dt.setDate(weekStart.getDate() + trainDay.dow);
+        const dateKey = fmtDate(dt);
+        if(dt > today && w===0) return; // skip future days this week
+
+        const isDone = !!dayDone[dateKey];
+        const exChecks = trainDay.exercises.map((ex,ei) => ({
+          name: ex.name,
+          done: !!checks[`${dateKey}_${ei}`],
+          peso: pesos[ex.name] || null
+        }));
+        const anyData = isDone || exChecks.some(e=>e.done||e.peso);
+        if(!anyData) return;
+        weekHasData = true; hasAny = true;
+
+        weekHtml += `<div class="perf-day-card">
+          <div class="perf-day-top">
+            <div>
+              <div class="perf-day-name">${WEEKDAYS[trainDay.dow]} — ${trainDay.typeEmoji} ${trainDay.typeLabel}</div>
+              <div class="perf-day-date">${fmtDateDisplay(dt)}</div>
+            </div>
+            <div class="perf-done-badge ${isDone?'yes':'no'}">${isDone?"✓ Feito":"Em aberto"}</div>
+          </div>
+          ${exChecks.map(ex=>`
+            <div class="perf-ex-row">
+              <div class="perf-ex-name">${ex.name}</div>
+              <span class="perf-ex-check">${ex.done?"✅":"⬜"}</span>
+              ${ex.peso?`<span class="perf-ex-peso">${ex.peso}kg</span>`:''}
+            </div>`).join("")}
+        </div>`;
+      });
+    }
+
+    if(weekHasData){
+      html += `<div style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin:16px 0 8px;">${weekLabel}</div>`;
+      html += weekHtml;
+    }
+  }
+
+  if(!hasAny){
+    html = `<div class="no-history">
+      <div style="font-size:2rem;margin-bottom:8px;">📊</div>
+      <div>O histórico vai aparecer aqui depois do primeiro treino.<br>Vai buscar esse plano! 💪</div>
+    </div>`;
+  }
+
+  container.innerHTML = html;
 }
 
-function toggleZone(zi) {
-  const el = document.getElementById("zone-" + zi);
-  el.classList.toggle("open");
+// ══════════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════════
+function fmtDate(dt){
+  return dt.toISOString().split("T")[0];
+}
+function fmtDateDisplay(dt){
+  return dt.toLocaleDateString("pt-PT", { day:"2-digit", month:"short" });
 }
 </script>
 </body>
