@@ -254,7 +254,7 @@ body {
   text-align: center;
   box-shadow: var(--shadow-sm);
 }
-.stat-num   { font-size: 1.9rem; font-weight: 900; color: var(--rose); line-height: 1; }
+.stat-num   { font-size: 1.55rem; font-weight: 900; color: var(--rose); line-height: 1.2; }
 .stat-label { font-size: 0.6rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
 
 /* ── WEEK TRACKER ── */
@@ -607,6 +607,109 @@ select:focus { border-color: var(--rose); }
 .no-data .big { font-size: 3rem; margin-bottom: 12px; }
 .no-data p { font-size: 0.9rem; font-weight: 600; line-height: 1.6; }
 
+/* ── v2: VISUAL DO EXERCÍCIO (animação SVG + vídeo embutido) ── */
+.ex-visual {
+  background: var(--rose-bg);
+  border: 1.5px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  margin-bottom: 11px;
+  overflow: hidden;
+}
+.ex-anim { display: flex; align-items: center; justify-content: center; padding: 4px 0 0; }
+.ex-anim svg { width: 158px; height: 96px; }
+.ex-anim svg .fig  { stroke: var(--rose-dark); stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.ex-anim svg .obj  { stroke: var(--text-muted); stroke-width: 3.5; fill: none; stroke-linecap: round; opacity: 0.75; }
+.ex-anim svg .fill { fill: var(--rose-dark); stroke: none; }
+.ex-anim svg .band { stroke: var(--teal); stroke-width: 3.5; fill: none; stroke-linecap: round; }
+.ex-anim-label {
+  text-align: center; font-size: 0.58rem; font-weight: 800;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--text-muted); padding: 0 0 7px;
+}
+.ex-video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+.ex-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.video-close {
+  width: 100%; padding: 8px; border: none;
+  background: var(--rose-light); color: var(--rose-dark);
+  font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 800; cursor: pointer;
+}
+
+/* ── v2: KCAL ── */
+.kcal-chip {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 0.68rem; font-weight: 800;
+  color: var(--warn); background: var(--warn-light);
+  padding: 2px 8px; border-radius: 20px; margin-top: 3px;
+}
+
+/* ── v2: CRONÓMETRO DE DESCANSO ── */
+.timer-fab {
+  position: fixed; right: 14px; bottom: 92px; z-index: 99;
+  background: var(--grad-hero); color: #fff;
+  border: none; border-radius: 50px; padding: 12px 16px;
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.92rem;
+  box-shadow: 0 6px 20px rgba(180,60,100,0.35);
+  cursor: pointer; display: none; align-items: center; gap: 6px;
+}
+.timer-fab.show    { display: flex; }
+.timer-fab.running { background: var(--teal); box-shadow: 0 6px 20px rgba(29,158,117,0.4); }
+.timer-panel {
+  position: fixed; right: 14px; bottom: 148px; z-index: 99;
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--radius-md); box-shadow: var(--shadow);
+  padding: 14px; display: none; width: 210px;
+}
+.timer-panel.show { display: block; }
+.timer-btns { display: flex; gap: 6px; }
+.timer-opt {
+  flex: 1; padding: 10px 0; border-radius: 10px;
+  border: 2px solid var(--border); background: var(--card);
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.85rem;
+  color: var(--text-soft); cursor: pointer;
+}
+.timer-opt:active { background: var(--rose-light); border-color: var(--rose); color: var(--rose-dark); }
+.timer-stop {
+  width: 100%; margin-top: 8px; padding: 9px; border-radius: 10px; border: none;
+  background: var(--rose-light); color: var(--rose-dark);
+  font-weight: 800; font-family: 'Nunito', sans-serif; cursor: pointer; display: none;
+}
+
+/* ── v2: CONQUISTAS ── */
+.badge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.badge-item {
+  text-align: center; padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--rose-bg); border: 1.5px solid var(--border-soft);
+  opacity: 0.38; filter: grayscale(1);
+}
+.badge-item.won { opacity: 1; filter: none; background: var(--gold-light); border-color: var(--gold); }
+.badge-emoji { font-size: 1.35rem; }
+.badge-name  { font-size: 0.55rem; font-weight: 800; color: var(--text-soft); margin-top: 3px; line-height: 1.25; }
+.badge-toast {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: 110px;
+  background: var(--gold-light); border: 2px solid var(--gold); color: #7A5800;
+  font-weight: 800; font-size: 0.88rem; padding: 12px 20px; border-radius: 50px;
+  box-shadow: var(--shadow); z-index: 200; white-space: nowrap;
+  animation: toastIn 0.4s ease;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, 16px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ── v2: GRÁFICO DE CARGAS ── */
+.chart-canvas { width: 100%; height: 170px; display: block; margin-top: 10px; }
+.chart-empty  { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-align: center; padding: 14px 0; }
+
+/* ── v2: INPUT NUMÉRICO (peso corporal) ── */
+.num-input {
+  width: 100%; padding: 12px 16px;
+  font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 800;
+  border-radius: var(--radius-sm); border: 2px solid var(--border);
+  background: var(--card); color: var(--rose-dark); outline: none;
+}
+.num-input:focus { border-color: var(--rose); }
+
 /* ── ANIMAÇÕES ── */
 @keyframes pop {
   0%   { transform: scale(1); }
@@ -648,12 +751,23 @@ select:focus { border-color: var(--rose); }
       <div class="stat-num" id="home-semanas">0</div>
       <div class="stat-label">Semanas</div>
     </div>
+    <div class="stat-box">
+      <div class="stat-num" id="home-kcal">—</div>
+      <div class="stat-label">Kcal 🔥</div>
+    </div>
   </div>
 
   <div class="card">
     <div class="card-body">
       <div class="card-title">Esta semana</div>
       <div class="week-grid" id="week-tracker"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">Conquistas 🏅</div>
+      <div class="badge-grid" id="badge-grid"></div>
     </div>
   </div>
 
@@ -694,6 +808,18 @@ select:focus { border-color: var(--rose); }
     <h2>Histórico</h2>
     <p>O teu progresso semana a semana</p>
   </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">📈 Evolução de cargas</div>
+      <select id="chart-ex-select" onchange="drawWeightChart()"></select>
+      <canvas class="chart-canvas" id="weight-chart" width="640" height="340"></canvas>
+      <div class="chart-empty" id="chart-empty" style="display:none">
+        Regista os pesos nos exercícios e a evolução aparece aqui 📊
+      </div>
+    </div>
+  </div>
+
   <div id="historico-content"></div>
 </div>
 
@@ -718,6 +844,12 @@ select:focus { border-color: var(--rose); }
       <input type="range" id="dur-slider" min="30" max="75" step="5" value="50">
       <span class="slider-val" id="dur-val">50 min</span>
     </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">O teu peso atual (kg) — para calcular as kcal</label>
+    <input class="num-input" id="bodyw-input" type="number" inputmode="decimal"
+      min="35" max="150" step="0.5" placeholder="ex: 62">
   </div>
 
   <div class="form-group">
@@ -780,6 +912,17 @@ select:focus { border-color: var(--rose); }
   </div>
 
   <div class="dica-card">
+    <div class="dica-icon">🚀</div>
+    <div class="dica-title">Fase 6+ meses — hora de progredir</div>
+    <p class="dica-text">
+      O teu corpo já recuperou muito — agora o objetivo é <strong>progressão gradual</strong>:
+      sobe a carga quando as últimas 2 repetições ficarem fáceis, uma coisa de cada vez
+      (mais peso OU mais reps, nunca os dois). O assoalho pélvico continua a ser prioridade:
+      os sinais de alerta continuam válidos, mesmo sentindo-te forte.
+    </p>
+  </div>
+
+  <div class="dica-card">
     <div class="dica-icon">⏱️</div>
     <div class="dica-title">Estrutura de cada sessão</div>
     <p class="dica-text">
@@ -825,6 +968,18 @@ select:focus { border-color: var(--rose); }
 
 </div><!-- /main -->
 
+<!-- ══════════════════ v2: CRONÓMETRO DE DESCANSO ══════════════════ -->
+<button class="timer-fab" id="timer-fab" onclick="toggleTimerPanel()">⏱️ <span id="timer-fab-txt">Descanso</span></button>
+<div class="timer-panel" id="timer-panel">
+  <div class="card-title">Descanso entre séries</div>
+  <div class="timer-btns">
+    <button class="timer-opt" onclick="startRest(45)">45s</button>
+    <button class="timer-opt" onclick="startRest(60)">60s</button>
+    <button class="timer-opt" onclick="startRest(90)">90s</button>
+  </div>
+  <button class="timer-stop" id="timer-stop" onclick="stopRest()">Parar ⏹</button>
+</div>
+
 <!-- ══════════════════ BOTTOM NAV ══════════════════ -->
 <nav class="bottom-nav">
   <button class="nav-item active" id="nav-home" onclick="showSection('home',this)">
@@ -850,154 +1005,178 @@ select:focus { border-color: var(--rose); }
 // ════════════════════════════════════════════════════════════
 const PLAN_TYPES = {
 
-  // DIA A: Core & Assoalho Pélvico — prioridade pós-parto/diastasia
+  // DIA A: Core & Assoalho Pélvico — fase 6m+: progressões seguras para diastase
   A: {
     label: "Core & Assoalho Pélvico", emoji: "🌿",
-    color: "#1D9E75", bg: "#E1F5EE",
+    color: "#1D9E75", bg: "#E1F5EE", met: 3.0,
     exercises: [
       {
         name: "Respiração diafragmática com ativação",
         zone: "Stretch Zone", detail: "3 × 10 respirações profundas",
         tip: "O exercício mais importante: inspira expandindo a barriga, expira ativando o assoalho pélvico (como se quisesses parar de fazer xixi)",
-        ytId: "ri2PVQNT9mQ"
+        ytId: "ri2PVQNT9mQ", anim: "breath"
       },
       {
         name: "Dead bug",
-        zone: "Stretch Zone", detail: "3 × 8 rep cada lado",
+        zone: "Stretch Zone", detail: "3 × 10 rep cada lado · progressão 6m+: segura um halter leve (1–2kg) nas mãos",
         tip: "Lombar SEMPRE colada no chão. Nunca deixa a barriga fazer cone — para imediatamente se isso acontecer",
-        ytId: "g_BYB0R-4Ws"
+        ytId: "g_BYB0R-4Ws", anim: "deadbug"
       },
       {
         name: "Bird-dog",
-        zone: "Stretch Zone", detail: "3 × 10 rep cada lado",
-        tip: "Costas neutras, movimento lento. Ativa o core profundo antes de mover os membros",
-        ytId: "wiFNA3sqjCA"
+        zone: "Stretch Zone", detail: "3 × 10 rep cada lado · pausa de 3 seg no topo",
+        tip: "Costas neutras, movimento lento. A pausa no topo é a progressão — o core trabalha mais para estabilizar",
+        ytId: "wiFNA3sqjCA", anim: "birddog"
       },
       {
         name: "Prancha lateral (joelhos no chão)",
-        zone: "Stretch Zone", detail: "3 × 15–20 seg cada lado",
-        tip: "Versão modificada — joelhos dobrados para reduzir pressão abdominal. Progride para pés quando te sentires pronta",
-        ytId: "_6vj5H4Pcqs"
+        zone: "Stretch Zone", detail: "3 × 25–30 seg cada lado · pronta? progride: apoia nos pés",
+        tip: "Aos 6m+ já podes testar a versão nos pés — mas volta aos joelhos se tremeres muito ou perderes a forma",
+        ytId: "_6vj5H4Pcqs", anim: "sideplank"
       },
       {
         name: "Ponte glútea com ativação pélvica",
-        zone: "Stretch Zone", detail: "3 × 12 rep",
+        zone: "Stretch Zone", detail: "3 × 12 rep · progressão: marcha no topo (alterna as pernas sem descer a anca)",
         tip: "No topo: aperta o glúteo E ativa o assoalho pélvico ao mesmo tempo. Não empurra a lombar para cima",
-        ytId: "OUgsJ8-Vi0E"
+        ytId: "OUgsJ8-Vi0E", anim: "bridge"
+      },
+      {
+        name: "Pallof press no cabo",
+        zone: "Strength Zone", detail: "3 × 10 rep cada lado, carga leve",
+        tip: "Anti-rotação: o core trava o movimento sem esmagar a barriga — perfeito para diastase. Expira ao esticar os braços",
+        ytQ: "pallof press cable como fazer", anim: "pallof"
       }
     ]
   },
 
-  // DIA B: Glúteos & Pernas — força, energia, metabolismo
+  // DIA B: Glúteos & Pernas — fase 6m+: hora de progredir carga
   B: {
     label: "Glúteos & Pernas", emoji: "🍑",
-    color: "#E8587A", bg: "#FCE8F0",
+    color: "#E8587A", bg: "#FCE8F0", met: 5.0,
     exercises: [
       {
         name: "Hip thrust (haltere ou máquina)",
-        zone: "Free Weight Zone", detail: "4 × 12 rep — começa sem peso, adiciona aos poucos",
-        tip: "Costas apoiadas no banco, queixo levemente para baixo. Expira no topo. Excelente para recuperar glúteo pós-parto",
-        ytId: "LM8XHLYJoYs"
+        zone: "Free Weight Zone", detail: "4 × 10–12 rep · 6m+: progride para barra ou máquina, sobe a carga aos poucos",
+        tip: "Costas apoiadas no banco, queixo levemente para baixo. Expira no topo. O melhor exercício para recuperar o glúteo",
+        ytId: "LM8XHLYJoYs", anim: "hipthrust"
       },
       {
         name: "Agachamento goblet (kettlebell)",
-        zone: "Functional Zone", detail: "3 × 12 rep",
-        tip: "Kettlebell à frente no peito. Joelhos seguem a direção dos pés, desce controlada. Ótimo para reativar padrão de agachamento",
-        ytId: "MeIiIdhvXT4"
+        zone: "Functional Zone", detail: "4 × 10 rep · sobe o peso quando as últimas 2 reps ficarem fáceis",
+        tip: "Kettlebell à frente no peito. Joelhos seguem a direção dos pés, desce controlada. Expira ao subir",
+        ytId: "MeIiIdhvXT4", anim: "squat"
       },
       {
-        name: "Passada reversa (peso corporal)",
-        zone: "Free Weight Zone", detail: "3 × 10 rep cada perna",
-        tip: "Passada para TRÁS — muito menos impacto que a clássica. Perfeita para pós-parto. Mantém o tronco ereto",
-        ytId: "csN1-_l3hvo"
+        name: "Passada reversa (com halteres)",
+        zone: "Free Weight Zone", detail: "3 × 10 rep cada perna · progressão 6m+: halter em cada mão",
+        tip: "Passada para TRÁS — muito menos impacto que a clássica. Tronco ereto, expira ao subir",
+        ytId: "csN1-_l3hvo", anim: "lunge"
       },
       {
         name: "Abdução com elástico (lateral walk)",
-        zone: "Functional Zone", detail: "3 × 15 passos cada lado",
+        zone: "Functional Zone", detail: "3 × 15 passos cada lado · usa elástico mais forte se ficar fácil",
         tip: "Elástico acima dos joelhos. Não deixa os joelhos colapsarem para dentro. Ativa glúteo médio — crucial para estabilidade pélvica",
-        ytId: "dqfXJbxzfxo"
+        ytId: "dqfXJbxzfxo", anim: "bandwalk"
       },
       {
         name: "Leg press (pés altos na plataforma)",
-        zone: "Strength Zone", detail: "3 × 15 rep, carga leve a moderada",
+        zone: "Strength Zone", detail: "3 × 12 rep · progride +2,5kg por semana se a técnica estiver limpa",
         tip: "Pés na parte alta da plataforma = mais ativação glútea. Não bloqueia os joelhos no topo. Expira ao empurrar",
-        ytId: "IZxyjW7MPJQ"
+        ytId: "IZxyjW7MPJQ", anim: "legpress"
+      },
+      {
+        name: "Stiff com halteres (RDL)",
+        zone: "Free Weight Zone", detail: "3 × 10 rep, peso leve a moderado",
+        tip: "Dobra a anca empurrando o glúteo para trás, costas neutras, halteres deslizam pelas pernas. Fortalece posterior e protege a lombar — expira ao subir",
+        ytQ: "stiff romeno halteres tecnica", anim: "rdl"
       }
     ]
   },
 
-  // DIA C: Cardio & Mobilidade — energia, humor, bem-estar
+  // DIA C: Cardio & Mobilidade — fase 6m+: intervalos leves
   C: {
     label: "Cardio & Mobilidade", emoji: "⚡",
-    color: "#5DCAA5", bg: "#E1F5EE",
+    color: "#5DCAA5", bg: "#E1F5EE", met: 6.0,
     exercises: [
       {
         name: "Caminhada na esteira (inclinação progressiva)",
-        zone: "Cardio Zone", detail: "15 min: começa a 4%, vai aumentando até 8%",
-        tip: "Mantém FC confortável — deve conseguir falar. O incline walking é excelente para glúteos sem impacto",
-        ytId: "YgVFCd8q1T4"
+        zone: "Cardio Zone", detail: "15 min · intervalos 6m+: 2 min a 6% + 1 min a 10%, repete",
+        tip: "Mantém FC confortável — deve conseguir falar na parte fácil. O incline walking é excelente para glúteos sem impacto",
+        ytId: "YgVFCd8q1T4", anim: "walk"
       },
       {
         name: "Bicicleta ergométrica (ritmo moderado)",
-        zone: "Cardio Zone", detail: "10 min, FC ≤ 130 bpm",
-        tip: "Zero impacto articular — perfeito para pós-parto. Cadência confortável, resistência leve",
-        ytId: "wD5kBCaQ_sk"
+        zone: "Cardio Zone", detail: "10 min, FC ≤ 140 bpm · resistência moderada",
+        tip: "Zero impacto articular. Aos 6m+ podes subir um pouco a resistência — cadência sempre confortável",
+        ytId: "wD5kBCaQ_sk", anim: "bike"
       },
       {
-        name: "Elíptico (resistência 2–3)",
-        zone: "Cardio Zone", detail: "8–10 min contínuos",
+        name: "Elíptico (resistência 4–5)",
+        zone: "Cardio Zone", detail: "10 min contínuos",
         tip: "Treino completo de corpo todo sem impacto. Ótimo para cardio suave e condicionamento geral",
-        ytId: "QXMB4PLxxCM"
+        ytId: "QXMB4PLxxCM", anim: "elliptical"
       },
       {
         name: "Foam roller costas e glúteos",
         zone: "Stretch Zone", detail: "5 min — 30 seg em cada zona",
         tip: "Rola devagar, para nos pontos mais tensos. Costas superiores, médias, glúteos. Recuperação essencial",
-        ytId: "QLN9_oixDrY"
+        ytId: "QLN9_oixDrY", anim: "foamroll"
       },
       {
         name: "Alongamento hip flexor (corredor)",
         zone: "Stretch Zone", detail: "3 × 30 seg cada lado",
         tip: "Posição de corredor no chão. Hip flexors ficam encurtados a carregar o bebé. Essencial para postura",
-        ytId: "PJrOG7lfyT0"
+        ytId: "PJrOG7lfyT0", anim: "hipstretch"
+      },
+      {
+        name: "Mobilidade torácica (gato-camelo)",
+        zone: "Stretch Zone", detail: "2 × 10 movimentos lentos",
+        tip: "Mobiliza a coluna toda — alivia as costas de carregar o Miguel ao colo. Movimento lento, acompanha a respiração",
+        ytQ: "gato camelo exercicio mobilidade", anim: "catcamel"
       }
     ]
   },
 
-  // DIA D: Parte superior leve — adaptado pós-parto, foco funcional
+  // DIA D: Parte superior — fase 6m+: progressão de carga funcional
   D: {
     label: "Parte Superior (leve)", emoji: "💪",
-    color: "#9b7ec8", bg: "#F3EEFF",
+    color: "#9b7ec8", bg: "#F3EEFF", met: 4.0,
     exercises: [
       {
         name: "Remada com haltere (unilateral)",
-        zone: "Free Weight Zone", detail: "3 × 12 rep cada braço, peso leve",
+        zone: "Free Weight Zone", detail: "3 × 10–12 rep cada braço · sobe o halter quando ficar fácil",
         tip: "Costas planas, cotovelo rente ao corpo. Essencial para postura — amamentar encurva muito as costas",
-        ytId: "roCP442LA5w"
+        ytId: "roCP442LA5w", anim: "row"
       },
       {
         name: "Puxada no cabo (lat pulldown) — pega larga",
-        zone: "Strength Zone", detail: "3 × 12 rep, carga confortável",
+        zone: "Strength Zone", detail: "3 × 10–12 rep, carga moderada",
         tip: "Puxa para o peito, não para trás da cabeça. Expira ao puxar. Fortalece as costas para carregar o Miguel",
-        ytId: "CAwf7n6Tk6c"
+        ytId: "CAwf7n6Tk6c", anim: "pulldown"
       },
       {
         name: "Rosca direta com haltere",
-        zone: "Free Weight Zone", detail: "3 × 12 rep, peso leve",
+        zone: "Free Weight Zone", detail: "3 × 12 rep",
         tip: "Bíceps forte = segurar o bebé com muito mais facilidade! Cotovelos fixos nos flancos",
-        ytId: "in7PaeYlhrg"
+        ytId: "in7PaeYlhrg", anim: "curl"
       },
       {
         name: "Extensão de tríceps no cabo",
         zone: "Strength Zone", detail: "3 × 12 rep",
         tip: "Cotovelos junto ao corpo, expira ao estender. Complementa o bíceps para força funcional nos braços",
-        ytId: "2-LAMcpzODU"
+        ytId: "2-LAMcpzODU", anim: "triceps"
       },
       {
         name: "Prancha isométrica (versão curta)",
-        zone: "Stretch Zone", detail: "3 × 20 seg — aumenta 5 seg por semana",
-        tip: "ATENÇÃO: para se a barriga fizer cone. Respira normalmente, não bloqueia. Versão curta e segura para pós-parto",
-        ytId: "pSHjTRCQxIw"
+        zone: "Stretch Zone", detail: "3 × 30 seg · 6m+: aumenta 5 seg por semana se a barriga não fizer cone",
+        tip: "ATENÇÃO: para se a barriga fizer cone. Respira normalmente, não bloqueia a respiração",
+        ytId: "pSHjTRCQxIw", anim: "plank"
+      },
+      {
+        name: "Desenvolvimento de ombros sentada",
+        zone: "Free Weight Zone", detail: "3 × 10 rep, halteres leves",
+        tip: "Sentada com costas apoiadas = zero pressão na barriga. Ombros fortes para levantar o Miguel ao alto! Expira ao empurrar",
+        ytQ: "desenvolvimento ombros halteres sentada", anim: "press"
       }
     ]
   }
@@ -1025,18 +1204,33 @@ function loadState(key, def) {
   try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch(e) { return def; }
 }
 
-let cfg         = loadState("cfg",          { days: 3, dur: 50, feel: "leve", diastasia: "sim" });
+let cfg         = loadState("cfg",          { days: 3, dur: 50, feel: "leve", diastasia: "sim", bodyW: null });
 let planData    = loadState("planData",     null);
 let checks      = loadState("checks",      {});  // "YYYY-MM-DD_exIdx": true
 let pesos       = loadState("pesos",       {});  // "exName": "5kg"
 let dayDone     = loadState("dayDone",     {});  // "YYYY-MM-DD": true
-let weightsHist = loadState("weightsHist", {});  // NOVO: "exName": [{date, weight}]
+let weightsHist = loadState("weightsHist", {});  // "exName": [{date, weight}]
+let kcalLog     = loadState("kcalLog",     {});  // v2: "YYYY-MM-DD": kcal estimadas
+let badges      = loadState("badges",      {});  // v2: "badgeId": "YYYY-MM-DD" (data da conquista)
+
+// v2: migra planData antigo para os exercícios da fase 6m+ (mantém dias/config da Andressa)
+function migratePlanData() {
+  if (!planData) return;
+  planData = planData.map(d => {
+    const t = PLAN_TYPES[d.dayType];
+    if (!t) return d;
+    return { ...d, typeLabel: t.label, typeEmoji: t.emoji, typeColor: t.color, typeBg: t.bg, exercises: t.exercises };
+  });
+  saveState("planData", planData);
+}
 
 // ════════════════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════════════════
 document.addEventListener("DOMContentLoaded", () => {
+  migratePlanData();      // v2: atualiza exercícios guardados para a fase 6m+
   initConfig();
+  checkBadges(false);     // v2: atribui badges já merecidas sem toast
   buildHome();
   if (planData) {
     renderPlan();
@@ -1045,6 +1239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("plano-content").style.display = "none";
   }
   buildHistorico();
+  buildChartCard();       // v2: gráfico de evolução de cargas
 });
 
 // ════════════════════════════════════════════════════════════
@@ -1060,8 +1255,13 @@ function showSection(name, btn) {
 
   window.scrollTo(0, 0);
   if (name === "home")      buildHome();
-  if (name === "historico") buildHistorico();
+  if (name === "historico") { buildHistorico(); buildChartCard(); }
   if (name === "plano" && planData) renderPlan();
+
+  // v2: cronómetro de descanso só aparece no Plano (ou enquanto está a contar)
+  const fab = document.getElementById("timer-fab");
+  if (fab) fab.classList.toggle("show", name === "plano" || restTimer !== null);
+  if (name !== "plano") document.getElementById("timer-panel")?.classList.remove("show");
 }
 
 // ════════════════════════════════════════════════════════════
@@ -1089,6 +1289,15 @@ function initConfig() {
   });
   document.getElementById("feel-select").addEventListener("change", function() {
     cfg.feel = this.value; saveState("cfg", cfg);
+  });
+
+  // v2: peso corporal para cálculo de kcal
+  const bw = document.getElementById("bodyw-input");
+  if (cfg.bodyW) bw.value = cfg.bodyW;
+  bw.addEventListener("input", function() {
+    const v = parseFloat(this.value);
+    cfg.bodyW = (v && v > 0) ? v : null;
+    saveState("cfg", cfg);
   });
 }
 
@@ -1120,6 +1329,7 @@ function buildHome() {
   buildWeekTracker();
   buildStats();
   buildStreak();
+  buildBadges();   // v2
 }
 
 // Calcula a idade do Miguel e mostra no subtítulo do header
@@ -1185,9 +1395,10 @@ function buildHeroCard() {
   let eyebrow, title, subtitle;
 
   if (daysUntil === 0) {
+    const kc = estimateKcal(day.dayType);
     eyebrow  = "🔥 TREINO DE HOJE";
     title    = `${day.typeEmoji} ${day.typeLabel}`;
-    subtitle = `Dia ${day.dayType} · ${cfg.dur} min · ${day.exercises.length} exercícios`;
+    subtitle = `Dia ${day.dayType} · ${cfg.dur} min · ${day.exercises.length} exercícios${kc ? ` · ~${kc} kcal` : ""}`;
   } else if (daysUntil === 1) {
     eyebrow  = "Próximo treino — Amanhã";
     title    = `${day.typeEmoji} ${day.typeLabel}`;
@@ -1240,16 +1451,34 @@ function buildStats() {
   document.getElementById("home-treinos").textContent    = allDone;
   document.getElementById("home-exercicios").textContent = allChecks;
   document.getElementById("home-semanas").textContent    = weeks;
+
+  // v2: total de kcal estimadas
+  const totalKcal = Object.values(kcalLog).reduce((a, b) => a + (parseInt(b) || 0), 0);
+  document.getElementById("home-kcal").textContent = totalKcal > 0 ? fmtK(totalKcal) : "—";
 }
 
-function buildStreak() {
+// v2: streak conta dias DE TREINO consecutivos — dias de descanso não quebram
+function calcStreak() {
   const today = new Date();
+  const trainDows = planData ? planData.map(d => d.dow) : null;
   let streak = 0;
-  for (let i = 0; i < 90; i++) {
-    const dt = new Date(today); dt.setDate(today.getDate() - i);
-    if (dayDone[fmtDate(dt)]) streak++; else break;
+  for (let i = 0; i < 120; i++) {
+    const dt  = new Date(today); dt.setDate(today.getDate() - i);
+    const key = fmtDate(dt);
+    if (trainDows) {
+      const dow = (dt.getDay() + 6) % 7;
+      if (!trainDows.includes(dow)) continue;         // dia de descanso: ignora
+      if (dayDone[key]) streak++;
+      else if (i === 0) continue;                     // hoje ainda pode treinar
+      else break;
+    } else {
+      if (dayDone[key]) streak++; else if (i > 0) break;
+    }
   }
-  document.getElementById("streak-num").textContent = streak;
+  return streak;
+}
+function buildStreak() {
+  document.getElementById("streak-num").textContent = calcStreak();
 }
 
 // ════════════════════════════════════════════════════════════
@@ -1317,7 +1546,7 @@ function renderPlan() {
         <div class="day-type-dot" style="background:${day.typeBg||'#F0F0F0'}">${day.typeEmoji}</div>
         <div class="day-info">
           <div class="day-name">${day.name} ${todayTag}</div>
-          <div class="day-meta">${day.typeLabel} · ${cfg.dur} min</div>
+          <div class="day-meta">${day.typeLabel} · ${cfg.dur} min${(() => { const kc = estimateKcal(day.dayType); return kc ? ` · 🔥~${kc} kcal` : ""; })()}</div>
         </div>
         <div class="day-status">${badge}</div>
         <div class="day-chevron">▶</div>
@@ -1346,12 +1575,28 @@ function renderPlan() {
 function buildExCard(ex, ei, dateKey) {
   const ck        = `${dateKey}_${ei}`;
   const isChecked = !!checks[ck];
-  const lastW     = pesos[ex.name] || "";
-  const ytUrl     = `https://youtu.be/${ex.ytId}`;
 
-  const lastWeightHtml = lastW
-    ? `<span class="weight-last">Última vez: <strong>${lastW} kg</strong></span>`
-    : `<span class="weight-last" style="font-style:italic">Primeira vez 🎉</span>`;
+  // v2: peso de HOJE no input; última sessão (data diferente) como referência
+  const histArr   = weightsHist[ex.name] || [];
+  const todayW    = (histArr.find(e => e.date === dateKey) || {}).weight || "";
+  const prevEntry = histArr.filter(e => e.date !== dateKey).slice(-1)[0];
+  const lastW     = pesos[ex.name] || "";
+
+  const lastWeightHtml = prevEntry
+    ? `<span class="weight-last">Última vez: <strong>${prevEntry.weight} kg</strong> · ${fmtDateShort(prevEntry.date)}</span>`
+    : (lastW
+      ? `<span class="weight-last">Última vez: <strong>${lastW} kg</strong></span>`
+      : `<span class="weight-last" style="font-style:italic">Primeira vez 🎉</span>`);
+
+  // v2: animação do movimento + vídeo embutido
+  const visualHtml = ex.anim && ANIMS[ex.anim]
+    ? `<div class="ex-visual" id="vis-${dateKey}-${ei}">${animContent(ex.anim)}</div>`
+    : "";
+
+  const videoBtn = ex.ytId
+    ? `<button class="yt-link" onclick="playVideo('${dateKey}',${ei},'${ex.ytId}','${ex.anim || ""}')">▶ Ver vídeo</button>`
+    : `<a class="yt-link" href="https://www.youtube.com/results?search_query=${encodeURIComponent(ex.ytQ || ex.name)}"
+         target="_blank" rel="noopener noreferrer">▶ Ver vídeo</a>`;
 
   return `<div class="ex-item${isChecked?" ex-done":""}" id="exitem-${dateKey}-${ei}">
     <div class="ex-header">
@@ -1359,12 +1604,13 @@ function buildExCard(ex, ei, dateKey) {
       <div class="ex-zone">${ex.zone}</div>
     </div>
     <div class="ex-detail">${ex.detail}</div>
+    ${visualHtml}
     <div class="ex-tip">💡 ${ex.tip}</div>
     <div class="weight-section">
       <div class="weight-label">Peso usado hoje</div>
       <div class="weight-row">
         <input class="weight-input" type="text" inputmode="decimal"
-          placeholder="—" value="${lastW}"
+          placeholder="${lastW || "—"}" value="${todayW}"
           onchange="saveWeight('${ex.name}','${dateKey}',this.value)"
           oninput="saveWeight('${ex.name}','${dateKey}',this.value)">
         <span class="weight-unit">kg</span>
@@ -1372,9 +1618,7 @@ function buildExCard(ex, ei, dateKey) {
       </div>
     </div>
     <div class="ex-actions">
-      <a class="yt-link" href="${ytUrl}" target="_blank" rel="noopener noreferrer">
-        ▶ Ver demonstração
-      </a>
+      ${videoBtn}
       <button class="ex-check-btn${isChecked?" done":""}" id="ck-${ck}"
         onclick="toggleCheck('${ck}','${dateKey}',${ei})">
         ${isChecked ? "✓ Feito!" : "Marcar feito"}
@@ -1453,11 +1697,30 @@ function saveWeight(exName, dateKey, val) {
     delete pesos[exName];
   }
   saveState("pesos", pesos);
+  checkBadges(true);   // v2: badge "Carga a subir"
 }
 
 function markDayDone(dateKey) {
   dayDone[dateKey] = !dayDone[dateKey];
   saveState("dayDone", dayDone);
+
+  // v2: regista/remove kcal estimadas do dia
+  const today    = new Date();
+  const todayDow = (today.getDay() + 6) % 7;
+  const trainDay = planData && planData.find(d => {
+    const diff = d.dow - todayDow;
+    const dt   = new Date(today); dt.setDate(today.getDate() + diff);
+    return fmtDate(dt) === dateKey;
+  });
+  if (dayDone[dateKey] && trainDay) {
+    const kc = estimateKcal(trainDay.dayType);
+    if (kc) { kcalLog[dateKey] = kc; saveState("kcalLog", kcalLog); }
+  } else if (!dayDone[dateKey] && kcalLog[dateKey]) {
+    delete kcalLog[dateKey]; saveState("kcalLog", kcalLog);
+  }
+
+  // v2: verifica novas conquistas (com toast)
+  if (dayDone[dateKey]) checkBadges(true);
 
   const btn  = document.getElementById("done-btn-" + dateKey);
   const card = document.getElementById("daycard-"  + dateKey);
@@ -1474,16 +1737,8 @@ function markDayDone(dateKey) {
     if (badge) {
       if (dayDone[dateKey]) {
         badge.className = "day-badge feito"; badge.textContent = "✓ Feito";
-      } else {
-        // Descobrir dayType para restaurar badge
-        const today    = new Date();
-        const todayDow = (today.getDay() + 6) % 7;
-        const trainDay = planData.find(d => {
-          const diff = d.dow - todayDow;
-          const dt   = new Date(today); dt.setDate(today.getDate() + diff);
-          return fmtDate(dt) === dateKey;
-        });
-        if (trainDay) { badge.className = "day-badge tipo"; badge.textContent = `Dia ${trainDay.dayType}`; }
+      } else if (trainDay) {
+        badge.className = "day-badge tipo"; badge.textContent = `Dia ${trainDay.dayType}`;
       }
     }
   }
@@ -1535,6 +1790,7 @@ function buildHistorico() {
             <div>
               <div class="hist-name">${WEEKDAYS[trainDay.dow]} — ${trainDay.typeEmoji} ${trainDay.typeLabel}</div>
               <div class="hist-date">${fmtDateDisplay(dt)}</div>
+              ${kcalLog[dateKey] ? `<span class="kcal-chip">🔥 ${kcalLog[dateKey]} kcal</span>` : ""}
             </div>
             <div class="hist-badge ${isDone?"yes":"no"}">${isDone ? "✓ Feito" : "Em aberto"}</div>
           </div>
@@ -1582,10 +1838,299 @@ function chipGroup(id, multi, onChange) {
 }
 
 // ════════════════════════════════════════════════════════════
+// v2 — ANIMAÇÕES SVG DOS EXERCÍCIOS (SMIL, sem dependências)
+// Bonequinhos simples que mostram o padrão de movimento
+// ════════════════════════════════════════════════════════════
+const ANIMS = {
+breath: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="34" cy="79" r="6"/><path class="fig" d="M42 81 L88 81"/><path class="fig" d="M88 81 L104 58 L118 86"/><circle class="fig" cx="64" cy="75" r="6"><animate attributeName="r" values="6;11;6" dur="3.6s" repeatCount="indefinite"/></circle></svg>`,
+deadbug: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="36" cy="80" r="6"/><path class="fig" d="M44 82 L92 82"/><g><path class="fig" d="M58 82 L58 52"/><animateTransform attributeName="transform" type="rotate" values="0 58 82;-46 58 82;0 58 82" dur="2.8s" repeatCount="indefinite"/></g><path class="fig" d="M92 82 L102 60 L116 66"/><g><path class="fig" d="M92 82 L104 54"/><animateTransform attributeName="transform" type="rotate" values="0 92 82;52 92 82;0 92 82" dur="2.8s" repeatCount="indefinite"/></g></svg>`,
+birddog: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="116" cy="50" r="6"/><path class="fig" d="M56 56 L108 56"/><path class="fig" d="M98 56 L98 88"/><path class="fig" d="M64 56 L64 76 L78 88"/><g><path class="fig" d="M108 56 L134 52"/><animateTransform attributeName="transform" type="rotate" values="22 108 56;-6 108 56;22 108 56" dur="2.6s" repeatCount="indefinite"/></g><g><path class="fig" d="M56 56 L30 52"/><animateTransform attributeName="transform" type="rotate" values="-22 56 56;6 56 56;-22 56 56" dur="2.6s" repeatCount="indefinite"/></g></svg>`,
+sideplank: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="fig" d="M112 88 L70 88"/><g><path class="fig" d="M70 88 L40 62"/><circle class="fill" cx="32" cy="52" r="6"/><path class="fig" d="M44 66 L44 88 L58 88"/><animateTransform attributeName="transform" type="rotate" values="8 70 88;-4 70 88;8 70 88" dur="2.6s" repeatCount="indefinite"/></g></svg>`,
+bridge: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="34" cy="80" r="6"/><path class="fig" d="M42 82 L74 78 L94 60 L112 86"><animate attributeName="d" values="M42 82 L74 78 L94 60 L112 86;M42 82 L74 60 L94 56 L112 86;M42 82 L74 78 L94 60 L112 86" dur="2.8s" repeatCount="indefinite"/></path></svg>`,
+pallof: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><line class="band" x1="8" y1="30" x2="66" y2="50"><animate attributeName="x2" values="66;96;66" dur="2.4s" repeatCount="indefinite"/></line><circle class="fill" cx="70" cy="32" r="6"/><path class="fig" d="M70 40 L70 66 M70 66 L62 90 M70 66 L80 90"/><path class="fig" d="M70 48 L66 50"><animate attributeName="d" values="M70 48 L66 50;M70 48 L96 50;M70 48 L66 50" dur="2.4s" repeatCount="indefinite"/></path></svg>`,
+hipthrust: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M28 90 L28 62 L52 62"/><circle class="fill" cx="34" cy="50" r="6"/><circle class="obj" cx="82" cy="72" r="9"><animate attributeName="cy" values="72;56;72" dur="2.6s" repeatCount="indefinite"/></circle><path class="fig" d="M46 62 L82 74 L104 74 L112 88"><animate attributeName="d" values="M46 62 L82 74 L104 74 L112 88;M46 62 L82 58 L104 62 L112 88;M46 62 L82 74 L104 74 L112 88" dur="2.6s" repeatCount="indefinite"/></path></svg>`,
+squat: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="76" cy="26" r="6"><animate attributeName="cy" values="26;44;26" dur="2.8s" repeatCount="indefinite"/></circle><rect class="fill" x="70" y="38" width="10" height="10" rx="2"><animate attributeName="y" values="38;56;38" dur="2.8s" repeatCount="indefinite"/></rect><path class="fig" d="M76 34 L76 60 L92 74 L84 90 M76 60 L62 74 L70 90"><animate attributeName="d" values="M76 34 L76 60 L92 74 L84 90 M76 60 L62 74 L70 90;M76 52 L78 68 L94 74 L86 90 M78 68 L60 76 L68 90;M76 34 L76 60 L92 74 L84 90 M76 60 L62 74 L70 90" dur="2.8s" repeatCount="indefinite"/></path></svg>`,
+lunge: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="70" cy="26" r="6"><animate attributeName="cy" values="26;36;26" dur="2.8s" repeatCount="indefinite"/></circle><path class="fig" d="M70 34 L70 60 M70 60 L74 76 L70 90 M70 60 L70 76 L64 90"><animate attributeName="d" values="M70 34 L70 60 M70 60 L74 76 L70 90 M70 60 L70 76 L64 90;M70 44 L70 66 M70 66 L86 74 L84 90 M70 66 L58 82 L44 88;M70 34 L70 60 M70 60 L74 76 L70 90 M70 60 L70 76 L64 90" dur="2.8s" repeatCount="indefinite"/></path></svg>`,
+bandwalk: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><g><circle class="fill" cx="80" cy="30" r="6"/><path class="fig" d="M80 38 L80 58"/><path class="fig" d="M80 58 L68 74 L66 90 M80 58 L92 74 L94 90"><animate attributeName="d" values="M80 58 L68 74 L66 90 M80 58 L92 74 L94 90;M80 58 L58 74 L54 90 M80 58 L98 74 L102 90;M80 58 L68 74 L66 90 M80 58 L92 74 L94 90" dur="2.2s" repeatCount="indefinite"/></path><path class="band" d="M67 76 Q80 82 91 76"><animate attributeName="d" values="M67 76 Q80 82 91 76;M59 76 Q80 86 97 76;M67 76 Q80 82 91 76" dur="2.2s" repeatCount="indefinite"/></path><animateTransform attributeName="transform" type="translate" values="-12 0;12 0;-12 0" dur="4.4s" repeatCount="indefinite"/></g></svg>`,
+legpress: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M34 90 L46 58 L66 62"/><circle class="fill" cx="44" cy="46" r="6"/><path class="fig" d="M52 56 L74 66"/><path class="fig" d="M74 66 L94 52 L112 62"><animate attributeName="d" values="M74 66 L94 52 L112 62;M74 66 L100 46 L124 52;M74 66 L94 52 L112 62" dur="2.6s" repeatCount="indefinite"/></path><line class="obj" x1="116" y1="42" x2="108" y2="70"><animate attributeName="x1" values="116;128;116" dur="2.6s" repeatCount="indefinite"/><animate attributeName="x2" values="108;120;108" dur="2.6s" repeatCount="indefinite"/></line></svg>`,
+rdl: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="fig" d="M74 62 L70 76 L72 90 M74 62 L80 76 L78 90"/><g><path class="fig" d="M74 62 L76 34"/><circle class="fill" cx="77" cy="26" r="6"/><path class="fig" d="M75 44 L75 62"/><circle class="fill" cx="75" cy="66" r="4"/><animateTransform attributeName="transform" type="rotate" values="0 74 62;74 74 62;0 74 62" dur="3s" repeatCount="indefinite"/></g></svg>`,
+walk: `<svg viewBox="0 0 160 100"><path class="obj" d="M20 84 L140 66 M28 90 L136 74"/><g><circle class="fill" cx="78" cy="22" r="6"/><path class="fig" d="M78 30 L76 54"/><g><path class="fig" d="M76 38 L86 50"/><animateTransform attributeName="transform" type="rotate" values="26 76 38;-26 76 38;26 76 38" dur="1.6s" repeatCount="indefinite"/></g><g><path class="fig" d="M76 54 L84 70 L82 78"/><animateTransform attributeName="transform" type="rotate" values="30 76 54;-24 76 54;30 76 54" dur="1.6s" repeatCount="indefinite"/></g><g><path class="fig" d="M76 54 L70 70 L74 78"/><animateTransform attributeName="transform" type="rotate" values="-24 76 54;30 76 54;-24 76 54" dur="1.6s" repeatCount="indefinite"/></g><animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.8s" repeatCount="indefinite"/></g></svg>`,
+bike: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="obj" cx="96" cy="74" r="14"/><path class="obj" d="M96 74 L70 74 L64 60 M70 74 L74 90 M96 60 L106 46"/><circle class="fill" cx="52" cy="34" r="6"/><path class="fig" d="M64 58 L56 42 M56 44 L104 46"/><g><line class="fig" x1="96" y1="74" x2="96" y2="86"/><circle class="fill" cx="96" cy="86" r="3.5"/><animateTransform attributeName="transform" type="rotate" values="0 96 74;360 96 74" dur="1.6s" repeatCount="indefinite"/></g><path class="fig" d="M64 58 L80 70 L96 84"><animate attributeName="d" values="M64 58 L80 70 L96 84;M64 58 L84 60 L96 64;M64 58 L80 70 L96 84" dur="1.6s" repeatCount="indefinite"/></path></svg>`,
+elliptical: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M60 90 L100 90 M80 90 L80 84"/><circle class="fill" cx="74" cy="24" r="6"/><path class="fig" d="M74 32 L74 54"/><g><path class="obj" d="M96 34 L96 62"/><path class="fig" d="M74 40 L96 44"/><animateTransform attributeName="transform" type="translate" values="6 0;-8 0;6 0" dur="1.8s" repeatCount="indefinite"/></g><g><path class="fig" d="M74 54 L74 72 L86 78"/><path class="obj" d="M70 80 L94 80"/><animateTransform attributeName="transform" type="translate" values="8 -2;-10 2;8 -2" dur="1.8s" repeatCount="indefinite"/></g><g><path class="fig" d="M74 54 L68 72 L58 78"/><path class="obj" d="M46 82 L70 82"/><animateTransform attributeName="transform" type="translate" values="-10 2;8 -2;-10 2" dur="1.8s" repeatCount="indefinite"/></g></svg>`,
+foamroll: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><g><circle class="fill" cx="42" cy="62" r="6"/><path class="fig" d="M50 66 L88 74 M88 74 L100 58 L112 74 M52 70 L48 84"/><animateTransform attributeName="transform" type="translate" values="0 0;14 0;0 0" dur="2.4s" repeatCount="indefinite"/></g><circle class="obj" cx="78" cy="82" r="8"><animate attributeName="cx" values="78;88;78" dur="2.4s" repeatCount="indefinite"/></circle></svg>`,
+hipstretch: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><g><circle class="fill" cx="66" cy="26" r="6"/><path class="fig" d="M66 34 L68 58 M68 58 L84 68 L84 90 M68 58 L52 74 L36 88"/><animateTransform attributeName="transform" type="translate" values="0 0;9 3;0 0" dur="3s" repeatCount="indefinite"/></g></svg>`,
+catcamel: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="116" cy="52" r="6"><animate attributeName="cy" values="52;60;52" dur="3s" repeatCount="indefinite"/></circle><path class="fig" d="M98 56 L98 88 M64 56 L64 76 L78 88"/><path class="fig" d="M56 56 Q82 50 108 56"><animate attributeName="d" values="M56 56 Q82 50 108 56;M56 56 Q82 34 108 56;M56 56 Q82 50 108 56" dur="3s" repeatCount="indefinite"/></path></svg>`,
+row: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="118" cy="38" r="6"/><path class="fig" d="M60 58 L112 44 M60 58 L58 74 L62 90 M60 58 L70 74 L68 90"/><path class="fig" d="M100 46 L100 70"><animate attributeName="d" values="M100 46 L100 70;M100 46 L98 54;M100 46 L100 70" dur="2.2s" repeatCount="indefinite"/></path><circle class="fill" cx="100" cy="74" r="5"><animate attributeName="cy" values="74;58;74" dur="2.2s" repeatCount="indefinite"/></circle></svg>`,
+pulldown: `<svg viewBox="0 0 160 100"><path class="obj" d="M52 12 L108 12 M80 12 L80 20"/><line class="obj" x1="56" y1="26" x2="104" y2="26"><animate attributeName="y1" values="26;46;26" dur="2.4s" repeatCount="indefinite"/><animate attributeName="y2" values="26;46;26" dur="2.4s" repeatCount="indefinite"/></line><circle class="fill" cx="80" cy="36" r="6"/><path class="fig" d="M80 42 L80 62 M80 62 L70 70 L70 80 M80 62 L90 70 L90 80"/><path class="fig" d="M72 48 L58 28 M88 48 L102 28"><animate attributeName="d" values="M72 48 L58 28 M88 48 L102 28;M72 48 L58 46 M88 48 L102 46;M72 48 L58 28 M88 48 L102 28" dur="2.4s" repeatCount="indefinite"/></path><path class="obj" d="M60 80 L100 80 M64 80 L64 90 M96 80 L96 90"/></svg>`,
+curl: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="78" cy="24" r="6"/><path class="fig" d="M78 32 L78 60 M78 60 L72 74 L74 90 M78 60 L84 74 L82 90 M78 38 L80 52"/><g><path class="fig" d="M80 52 L84 68"/><circle class="fill" cx="85" cy="71" r="5"/><animateTransform attributeName="transform" type="rotate" values="0 80 52;-118 80 52;0 80 52" dur="2.4s" repeatCount="indefinite"/></g></svg>`,
+triceps: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><line class="band" x1="98" y1="8" x2="94" y2="38"><animate attributeName="x2" values="94;93;94" dur="2.2s" repeatCount="indefinite"/><animate attributeName="y2" values="38;55;38" dur="2.2s" repeatCount="indefinite"/></line><circle class="fill" cx="76" cy="24" r="6"/><path class="fig" d="M76 32 L76 60 M76 60 L70 74 L72 90 M76 60 L84 74 L82 90 M76 38 L86 46"/><g><path class="fig" d="M86 46 L94 38"/><animateTransform attributeName="transform" type="rotate" values="0 86 46;96 86 46;0 86 46" dur="2.2s" repeatCount="indefinite"/></g></svg>`,
+plank: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><g><circle class="fill" cx="38" cy="58" r="6"/><path class="fig" d="M46 62 L112 74 L128 88 M50 64 L50 78 L62 80"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -2.5;0 0" dur="3.2s" repeatCount="indefinite"/></g></svg>`,
+press: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M60 90 L60 46 M56 78 L96 78 M92 78 L92 90"/><circle class="fill" cx="78" cy="34" r="6"/><path class="fig" d="M78 40 L78 62 M78 62 L94 68 L94 78"/><path class="fig" d="M70 46 L62 32 M86 46 L94 32"><animate attributeName="d" values="M70 46 L62 32 M86 46 L94 32;M70 46 L66 14 M86 46 L90 14;M70 46 L62 32 M86 46 L94 32" dur="2.6s" repeatCount="indefinite"/></path><circle class="fill" cx="62" cy="29" r="4"><animate attributeName="cy" values="29;11;29" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cx" values="62;66;62" dur="2.6s" repeatCount="indefinite"/></circle><circle class="fill" cx="94" cy="29" r="4"><animate attributeName="cy" values="29;11;29" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cx" values="94;90;94" dur="2.6s" repeatCount="indefinite"/></circle></svg>`
+};
+
+// ════════════════════════════════════════════════════════════
+// v2 — VÍDEO EMBUTIDO (click-to-play, youtube-nocookie)
+// ════════════════════════════════════════════════════════════
+function playVideo(dateKey, ei, ytId, animKey) {
+  const vis = document.getElementById(`vis-${dateKey}-${ei}`);
+  if (!vis) return;
+  vis.innerHTML = `
+    <div class="ex-video-wrap">
+      <iframe src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1"
+        allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <button class="video-close" onclick="closeVideo('${dateKey}',${ei},'${animKey}')">✕ Fechar vídeo</button>`;
+}
+function closeVideo(dateKey, ei, animKey) {
+  const vis = document.getElementById(`vis-${dateKey}-${ei}`);
+  if (!vis) return;
+  vis.innerHTML = animContent(animKey);
+}
+function animContent(animKey) {
+  if (!ANIMS[animKey]) return "";
+  return `<div class="ex-anim">${ANIMS[animKey]}</div><div class="ex-anim-label">movimento aproximado</div>`;
+}
+
+// ════════════════════════════════════════════════════════════
+// v2 — KCAL (MET × peso × duração)
+// ════════════════════════════════════════════════════════════
+function estimateKcal(dayType) {
+  const w = parseFloat(cfg.bodyW);
+  if (!w || w <= 0) return null;
+  const met = (PLAN_TYPES[dayType] && PLAN_TYPES[dayType].met) || 4;
+  return Math.round(met * 3.5 * w / 200 * cfg.dur);
+}
+function fmtK(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace(".", ",") + "k" : String(n); }
+
+// ════════════════════════════════════════════════════════════
+// v2 — CRONÓMETRO DE DESCANSO
+// ════════════════════════════════════════════════════════════
+let restTimer = null, restEnd = 0;
+
+function toggleTimerPanel() {
+  document.getElementById("timer-panel").classList.toggle("show");
+}
+function startRest(sec) {
+  stopRest(true);
+  restEnd   = Date.now() + sec * 1000;
+  restTimer = setInterval(tickRest, 250);
+  document.getElementById("timer-panel").classList.remove("show");
+  document.getElementById("timer-fab").classList.add("running", "show");
+  document.getElementById("timer-stop").style.display = "block";
+  tickRest();
+}
+function tickRest() {
+  const remain = Math.ceil((restEnd - Date.now()) / 1000);
+  if (remain <= 0) { finishRest(); return; }
+  document.getElementById("timer-fab-txt").textContent = remain + "s";
+}
+function stopRest(silent) {
+  if (restTimer) { clearInterval(restTimer); restTimer = null; }
+  document.getElementById("timer-fab-txt").textContent = "Descanso";
+  document.getElementById("timer-fab").classList.remove("running");
+  document.getElementById("timer-stop").style.display = "none";
+  if (!silent) document.getElementById("timer-panel").classList.remove("show");
+}
+function finishRest() {
+  stopRest(true);
+  try { if (navigator.vibrate) navigator.vibrate([200, 100, 200]); } catch (e) {}
+  beep();
+  showToast("💥 Descanso acabou — próxima série!");
+  // se entretanto saiu do Plano, esconde o FAB
+  if (!document.getElementById("sec-plano").classList.contains("active"))
+    document.getElementById("timer-fab").classList.remove("show");
+}
+function beep() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0, 0.25].forEach(t => {
+      const osc = ctx.createOscillator(), gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = 880; osc.type = "sine";
+      gain.gain.setValueAtTime(0.25, ctx.currentTime + t);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.18);
+      osc.start(ctx.currentTime + t); osc.stop(ctx.currentTime + t + 0.2);
+    });
+  } catch (e) {}
+}
+
+// ════════════════════════════════════════════════════════════
+// v2 — CONQUISTAS / BADGES
+// ════════════════════════════════════════════════════════════
+const BADGES = [
+  { id: "first",   emoji: "🌱", name: "1º treino",        test: s => s.treinos >= 1 },
+  { id: "five",    emoji: "💪", name: "5 treinos",         test: s => s.treinos >= 5 },
+  { id: "ten",     emoji: "🔥", name: "10 treinos",        test: s => s.treinos >= 10 },
+  { id: "queen",   emoji: "👑", name: "25 treinos",        test: s => s.treinos >= 25 },
+  { id: "streak3", emoji: "⚡", name: "3 treinos seguidos", test: s => s.streak >= 3 },
+  { id: "week",    emoji: "📅", name: "Semana perfeita",   test: s => s.perfectWeek },
+  { id: "month",   emoji: "🏆", name: "4 semanas ativas",  test: s => s.weeks >= 4 },
+  { id: "load",    emoji: "🏋️‍♀️", name: "Carga a subir",   test: s => s.loadUp }
+];
+
+function badgeStats() {
+  const treinos = Object.values(dayDone).filter(Boolean).length;
+  const weeks   = treinos > 0 ? Math.ceil(treinos / (cfg.days || 3)) : 0;
+  const streak  = calcStreak();
+
+  // Semana perfeita: alguma semana (últimas 8) com TODOS os dias de treino feitos
+  let perfectWeek = false;
+  if (planData && planData.length) {
+    const today = new Date();
+    for (let w = 0; w < 8 && !perfectWeek; w++) {
+      const monday = new Date(today);
+      monday.setDate(today.getDate() - ((today.getDay() + 6) % 7) - w * 7);
+      perfectWeek = planData.every(d => {
+        const dt = new Date(monday); dt.setDate(monday.getDate() + d.dow);
+        return !!dayDone[fmtDate(dt)];
+      });
+    }
+  }
+
+  // Carga a subir: algum exercício com peso maior que o primeiro registo
+  const num = v => parseFloat(String(v).replace(",", "."));
+  const loadUp = Object.values(weightsHist).some(arr =>
+    arr && arr.length >= 2 && num(arr[arr.length - 1].weight) > num(arr[0].weight)
+  );
+
+  return { treinos, weeks, streak, perfectWeek, loadUp };
+}
+
+function checkBadges(announce) {
+  const s = badgeStats();
+  const newOnes = [];
+  BADGES.forEach(b => {
+    if (!badges[b.id] && b.test(s)) {
+      badges[b.id] = fmtDate(new Date());
+      newOnes.push(b);
+    }
+  });
+  if (newOnes.length) {
+    saveState("badges", badges);
+    if (announce) showToast(`🏅 Nova conquista: ${newOnes[0].emoji} ${newOnes[0].name}!`);
+  }
+  return newOnes;
+}
+
+function buildBadges() {
+  const grid = document.getElementById("badge-grid");
+  if (!grid) return;
+  grid.innerHTML = BADGES.map(b => `
+    <div class="badge-item${badges[b.id] ? " won" : ""}" title="${b.name}">
+      <div class="badge-emoji">${b.emoji}</div>
+      <div class="badge-name">${b.name}</div>
+    </div>`).join("");
+}
+
+function showToast(msg) {
+  document.querySelectorAll(".badge-toast").forEach(t => t.remove());
+  const el = document.createElement("div");
+  el.className = "badge-toast";
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3200);
+}
+
+// ════════════════════════════════════════════════════════════
+// v2 — GRÁFICO DE EVOLUÇÃO DE CARGAS (canvas puro)
+// ════════════════════════════════════════════════════════════
+function buildChartCard() {
+  const sel = document.getElementById("chart-ex-select");
+  if (!sel) return;
+  const names = Object.keys(weightsHist)
+    .filter(n => weightsHist[n] && weightsHist[n].length > 0)
+    .sort((a, b) => a.localeCompare(b, "pt"));
+
+  const canvas = document.getElementById("weight-chart");
+  const empty  = document.getElementById("chart-empty");
+
+  if (!names.length) {
+    sel.style.display = "none"; canvas.style.display = "none"; empty.style.display = "block";
+    return;
+  }
+  sel.style.display = "block"; canvas.style.display = "block"; empty.style.display = "none";
+
+  const current = sel.value;
+  sel.innerHTML = names.map(n => `<option value="${n}"${n === current ? " selected" : ""}>${n}</option>`).join("");
+  drawWeightChart();
+}
+
+function drawWeightChart() {
+  const sel    = document.getElementById("chart-ex-select");
+  const canvas = document.getElementById("weight-chart");
+  if (!sel || !canvas || !sel.value) return;
+
+  const num  = v => parseFloat(String(v).replace(",", "."));
+  const data = (weightsHist[sel.value] || [])
+    .filter(e => !isNaN(num(e.weight)))
+    .slice()
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+  if (!data.length) return;
+
+  const padL = 30, padR = 30, padT = 34, padB = 44;
+  const vals = data.map(e => num(e.weight));
+  let min = Math.min(...vals), max = Math.max(...vals);
+  if (min === max) { min -= 1; max += 1; }
+  const span = max - min;
+
+  const px = i => data.length === 1 ? W / 2 : padL + (W - padL - padR) * (i / (data.length - 1));
+  const py = v => padT + (H - padT - padB) * (1 - (v - min) / span);
+
+  const css = getComputedStyle(document.documentElement);
+  const rose = css.getPropertyValue("--rose").trim()      || "#D94F7A";
+  const teal = css.getPropertyValue("--teal").trim()      || "#1D9E75";
+  const mut  = css.getPropertyValue("--text-muted").trim() || "#BCA5B0";
+
+  // Área preenchida
+  if (data.length > 1) {
+    const grad = ctx.createLinearGradient(0, padT, 0, H - padB);
+    grad.addColorStop(0, "rgba(217,79,122,0.22)");
+    grad.addColorStop(1, "rgba(217,79,122,0.02)");
+    ctx.beginPath();
+    data.forEach((e, i) => i === 0 ? ctx.moveTo(px(i), py(vals[i])) : ctx.lineTo(px(i), py(vals[i])));
+    ctx.lineTo(px(data.length - 1), H - padB); ctx.lineTo(px(0), H - padB); ctx.closePath();
+    ctx.fillStyle = grad; ctx.fill();
+
+    // Linha
+    ctx.beginPath();
+    data.forEach((e, i) => i === 0 ? ctx.moveTo(px(i), py(vals[i])) : ctx.lineTo(px(i), py(vals[i])));
+    ctx.strokeStyle = rose; ctx.lineWidth = 5; ctx.lineJoin = "round"; ctx.lineCap = "round";
+    ctx.stroke();
+  }
+
+  // Pontos + valores
+  ctx.font = "bold 22px Nunito, sans-serif"; ctx.textAlign = "center";
+  data.forEach((e, i) => {
+    const x = px(i), y = py(vals[i]);
+    ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI * 2);
+    ctx.fillStyle = vals[i] >= vals[Math.max(0, i - 1)] && i > 0 ? teal : rose;
+    if (i === 0) ctx.fillStyle = rose;
+    ctx.fill();
+    ctx.lineWidth = 4; ctx.strokeStyle = "#fff"; ctx.stroke();
+    // valor por cima (só primeiro, último e máximo para não poluir)
+    if (i === 0 || i === data.length - 1 || vals[i] === max) {
+      ctx.fillStyle = "#7A5060";
+      ctx.fillText(String(e.weight).replace(".", ",") + "kg", x, y - 16);
+    }
+  });
+
+  // Datas primeiro/último
+  ctx.fillStyle = mut; ctx.font = "bold 19px Nunito, sans-serif";
+  const fmtD = d => d.slice(8, 10) + "/" + d.slice(5, 7);
+  ctx.textAlign = "left";  ctx.fillText(fmtD(data[0].date), padL - 16, H - 14);
+  if (data.length > 1) { ctx.textAlign = "right"; ctx.fillText(fmtD(data[data.length - 1].date), W - padR + 16, H - 14); }
+}
+
+// ════════════════════════════════════════════════════════════
 // UTILS
 // ════════════════════════════════════════════════════════════
 function fmtDate(dt)        { return dt.toISOString().split("T")[0]; }
 function fmtDateDisplay(dt) { return dt.toLocaleDateString("pt-PT", { day: "2-digit", month: "short" }); }
+function fmtDateShort(key)  { return key ? key.slice(8, 10) + "/" + key.slice(5, 7) : ""; }
 </script>
 </body>
 </html>
