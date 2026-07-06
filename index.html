@@ -615,10 +615,10 @@ select:focus { border-color: var(--rose); }
   margin-bottom: 11px;
   overflow: hidden;
 }
-.ex-anim { display: flex; align-items: center; justify-content: center; padding: 4px 0 0; }
-.ex-anim svg { width: 158px; height: 96px; }
+.ex-anim { display: flex; align-items: center; justify-content: center; padding: 6px 0 0; }
+.ex-anim svg { width: 216px; height: 132px; }
 .ex-anim svg .fig  { stroke: var(--rose-dark); stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.ex-anim svg .obj  { stroke: var(--text-muted); stroke-width: 3.5; fill: none; stroke-linecap: round; opacity: 0.75; }
+.ex-anim svg .obj  { stroke: var(--text-muted); stroke-width: 3.5; fill: none; stroke-linecap: round; opacity: 0.9; }
 .ex-anim svg .fill { fill: var(--rose-dark); stroke: none; }
 .ex-anim svg .band { stroke: var(--teal); stroke-width: 3.5; fill: none; stroke-linecap: round; }
 .ex-anim-label {
@@ -827,7 +827,7 @@ select:focus { border-color: var(--rose); }
 <div class="section" id="sec-config">
 
   <div class="config-title">O teu plano</div>
-  <div class="config-sub">Personaliza para o teu momento atual — pós-parto é uma fase única ✨</div>
+  <div class="config-sub">Personaliza o teu treino — força, braços, pernas e core, ao teu ritmo ✨</div>
 
   <div class="form-group">
     <label class="form-label">Dias por semana</label>
@@ -917,8 +917,9 @@ select:focus { border-color: var(--rose); }
     <p class="dica-text">
       O teu corpo já recuperou muito — agora o objetivo é <strong>progressão gradual</strong>:
       sobe a carga quando as últimas 2 repetições ficarem fáceis, uma coisa de cada vez
-      (mais peso OU mais reps, nunca os dois). O assoalho pélvico continua a ser prioridade:
-      os sinais de alerta continuam válidos, mesmo sentindo-te forte.
+      (mais peso OU mais reps, nunca os dois). <strong>Exercício novo? Primeira semana sempre
+      com peso leve</strong> — aprende o movimento primeiro, a carga vem depois.
+      Os sinais de alerta continuam válidos, mesmo sentindo-te forte.
     </p>
   </div>
 
@@ -936,10 +937,11 @@ select:focus { border-color: var(--rose); }
     <div class="dica-icon">🗓️</div>
     <div class="dica-title">Estrutura dos dias</div>
     <p class="dica-text">
-      <strong>Dia A</strong> — Core & Assoalho Pélvico (prioridade máxima pós-parto)<br>
+      <strong>Dia A</strong> — Core profundo, assoalho pélvico + braços leves<br>
       <strong>Dia B</strong> — Glúteos & Pernas (músculo grande, queima calorias, dá energia)<br>
-      <strong>Dia C</strong> — Cardio + Mobilidade geral<br>
-      <strong>Dia D (se 4 dias)</strong> — Parte superior leve + core de reforço
+      <strong>Dia D</strong> — Braços & Ombros (dia dedicado de parte superior)<br>
+      <strong>Dia C (se 4 dias)</strong> — Cardio + Mobilidade geral<br>
+      Cardio nos outros planos: os 5 min de esteira do aquecimento + descanso ativo
     </p>
   </div>
 
@@ -1005,10 +1007,10 @@ select:focus { border-color: var(--rose); }
 // ════════════════════════════════════════════════════════════
 const PLAN_TYPES = {
 
-  // DIA A: Core & Assoalho Pélvico — fase 6m+: progressões seguras para diastase
+  // DIA A: Core, Pélvico & Braços — fase 6m+: progressões seguras + braços leves
   A: {
-    label: "Core & Assoalho Pélvico", emoji: "🌿",
-    color: "#1D9E75", bg: "#E1F5EE", met: 3.0,
+    label: "Core, Pélvico & Braços", emoji: "🌿",
+    color: "#1D9E75", bg: "#E1F5EE", met: 3.2,
     exercises: [
       {
         name: "Respiração diafragmática com ativação",
@@ -1045,6 +1047,18 @@ const PLAN_TYPES = {
         zone: "Strength Zone", detail: "3 × 10 rep cada lado, carga leve",
         tip: "Anti-rotação: o core trava o movimento sem esmagar a barriga — perfeito para diastase. Expira ao esticar os braços",
         ytQ: "pallof press cable como fazer", anim: "pallof"
+      },
+      {
+        name: "Rosca alternada (halteres leves)",
+        zone: "Free Weight Zone", detail: "2 × 12 rep cada braço · começa com 2–3kg",
+        tip: "Cotovelos fixos nos flancos, alterna os braços. Peso leve e movimento controlado — força de braço sem pressa",
+        ytQ: "rosca alternada halteres tecnica", anim: "curl"
+      },
+      {
+        name: "Elevação lateral (ombros)",
+        zone: "Free Weight Zone", detail: "2 × 12 rep · halteres de 2–4kg para começar",
+        tip: "Sobe até à altura dos ombros, desce devagar em 2 segundos. Não balança o corpo",
+        ytQ: "elevacao lateral halteres tecnica", anim: "lateral"
       }
     ]
   },
@@ -1137,9 +1151,9 @@ const PLAN_TYPES = {
     ]
   },
 
-  // DIA D: Parte superior — fase 6m+: progressão de carga funcional
+  // DIA D: Braços & Ombros — dia dedicado de parte superior (entra no plano de 3 dias)
   D: {
-    label: "Parte Superior (leve)", emoji: "💪",
+    label: "Braços & Ombros", emoji: "💪",
     color: "#9b7ec8", bg: "#F3EEFF", met: 4.0,
     exercises: [
       {
@@ -1177,12 +1191,25 @@ const PLAN_TYPES = {
         zone: "Free Weight Zone", detail: "3 × 10 rep, halteres leves",
         tip: "Sentada com costas apoiadas = zero pressão na barriga. Ombros fortes para levantar o Miguel ao alto! Expira ao empurrar",
         ytQ: "desenvolvimento ombros halteres sentada", anim: "press"
+      },
+      {
+        name: "Flexão inclinada (mãos no banco)",
+        zone: "Functional Zone", detail: "3 × 8–10 rep · quanto mais alto o apoio, mais fácil",
+        tip: "Peito, ombros e tríceps num movimento só. ATENÇÃO: se a barriga fizer cone, sobe o apoio (mais fácil) ou salta este",
+        ytQ: "flexao inclinada banco iniciante", anim: "pushup"
+      },
+      {
+        name: "Elevação lateral (ombros)",
+        zone: "Free Weight Zone", detail: "3 × 12 rep · 2–4kg para começar",
+        tip: "Sobe até à altura dos ombros, sem balançar o corpo. Desce em 2 segundos — a descida também conta",
+        ytQ: "elevacao lateral halteres tecnica", anim: "lateral"
       }
     ]
   }
 };
 
-const DAY_SEQUENCES  = { 2: ["A","B"], 3: ["A","B","C"], 4: ["A","B","C","D"] };
+// v2.1: braços entram no plano de 3 dias (Dia D); cardio dedicado fica nos 4 dias
+const DAY_SEQUENCES  = { 2: ["A","B"], 3: ["A","B","D"], 4: ["A","B","D","C"] };
 const WEEKDAYS       = ["Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"];
 const WEEKDAYS_SHORT = ["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"];
 const FEEL_MSGS = {
@@ -1213,9 +1240,31 @@ let weightsHist = loadState("weightsHist", {});  // "exName": [{date, weight}]
 let kcalLog     = loadState("kcalLog",     {});  // v2: "YYYY-MM-DD": kcal estimadas
 let badges      = loadState("badges",      {});  // v2: "badgeId": "YYYY-MM-DD" (data da conquista)
 
-// v2: migra planData antigo para os exercícios da fase 6m+ (mantém dias/config da Andressa)
+// Constrói o plano a partir da config atual (usado por generatePlan e pela migração)
+function buildPlanFromCfg() {
+  const seq       = DAY_SEQUENCES[cfg.days] || DAY_SEQUENCES[3];
+  const trainDows = { 2: [0,3], 3: [0,2,4], 4: [0,1,3,4] }[cfg.days] || [0,2,4];
+  return trainDows.map((dow, i) => ({
+    dow,
+    dayType:   seq[i],
+    typeLabel: PLAN_TYPES[seq[i]].label,
+    typeEmoji: PLAN_TYPES[seq[i]].emoji,
+    typeColor: PLAN_TYPES[seq[i]].color,
+    typeBg:    PLAN_TYPES[seq[i]].bg,
+    exercises: PLAN_TYPES[seq[i]].exercises
+  }));
+}
+
+// v2: migra planData antigo (mantém dias/config da Andressa)
+// planVer 3 = divisão v2.1 com dia de Braços no plano de 3 dias
 function migratePlanData() {
-  if (!planData) return;
+  if (!planData) { saveState("planVer", 3); return; }
+  if (loadState("planVer", 1) < 3) {
+    planData = buildPlanFromCfg();          // reconstrói com a nova divisão
+    saveState("planData", planData);
+    saveState("planVer", 3);
+    return;
+  }
   planData = planData.map(d => {
     const t = PLAN_TYPES[d.dayType];
     if (!t) return d;
@@ -1302,20 +1351,9 @@ function initConfig() {
 }
 
 function generatePlan() {
-  const seq      = DAY_SEQUENCES[cfg.days] || DAY_SEQUENCES[3];
-  const trainDows = { 2: [0,3], 3: [0,2,4], 4: [0,1,3,4] }[cfg.days] || [0,2,4];
-
-  planData = trainDows.map((dow, i) => ({
-    dow,
-    dayType:   seq[i],
-    typeLabel: PLAN_TYPES[seq[i]].label,
-    typeEmoji: PLAN_TYPES[seq[i]].emoji,
-    typeColor: PLAN_TYPES[seq[i]].color,
-    typeBg:    PLAN_TYPES[seq[i]].bg,
-    exercises: PLAN_TYPES[seq[i]].exercises
-  }));
-
+  planData = buildPlanFromCfg();
   saveState("planData", planData);
+  saveState("planVer", 3);
   renderPlan();
   showSection("plano", document.getElementById("nav-plano"));
 }
@@ -1843,7 +1881,7 @@ function chipGroup(id, multi, onChange) {
 // ════════════════════════════════════════════════════════════
 const ANIMS = {
 breath: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="34" cy="79" r="6"/><path class="fig" d="M42 81 L88 81"/><path class="fig" d="M88 81 L104 58 L118 86"/><circle class="fig" cx="64" cy="75" r="6"><animate attributeName="r" values="6;11;6" dur="3.6s" repeatCount="indefinite"/></circle></svg>`,
-deadbug: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="36" cy="80" r="6"/><path class="fig" d="M44 82 L92 82"/><g><path class="fig" d="M58 82 L58 52"/><animateTransform attributeName="transform" type="rotate" values="0 58 82;-46 58 82;0 58 82" dur="2.8s" repeatCount="indefinite"/></g><path class="fig" d="M92 82 L102 60 L116 66"/><g><path class="fig" d="M92 82 L104 54"/><animateTransform attributeName="transform" type="rotate" values="0 92 82;52 92 82;0 92 82" dur="2.8s" repeatCount="indefinite"/></g></svg>`,
+deadbug: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="36" cy="80" r="6"/><path class="fig" d="M44 82 L90 82"/><path class="fig" d="M90 82 L90 60 L106 60"/><g><path class="fig" d="M58 82 L58 54"/><animateTransform attributeName="transform" type="rotate" values="0 58 82;-44 58 82;0 58 82" dur="2.8s" repeatCount="indefinite"/></g><g><path class="fig" d="M90 82 L104 56"/><animateTransform attributeName="transform" type="rotate" values="0 90 82;50 90 82;0 90 82" dur="2.8s" repeatCount="indefinite"/></g></svg>`,
 birddog: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="116" cy="50" r="6"/><path class="fig" d="M56 56 L108 56"/><path class="fig" d="M98 56 L98 88"/><path class="fig" d="M64 56 L64 76 L78 88"/><g><path class="fig" d="M108 56 L134 52"/><animateTransform attributeName="transform" type="rotate" values="22 108 56;-6 108 56;22 108 56" dur="2.6s" repeatCount="indefinite"/></g><g><path class="fig" d="M56 56 L30 52"/><animateTransform attributeName="transform" type="rotate" values="-22 56 56;6 56 56;-22 56 56" dur="2.6s" repeatCount="indefinite"/></g></svg>`,
 sideplank: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="fig" d="M112 88 L70 88"/><g><path class="fig" d="M70 88 L40 62"/><circle class="fill" cx="32" cy="52" r="6"/><path class="fig" d="M44 66 L44 88 L58 88"/><animateTransform attributeName="transform" type="rotate" values="8 70 88;-4 70 88;8 70 88" dur="2.6s" repeatCount="indefinite"/></g></svg>`,
 bridge: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="34" cy="80" r="6"/><path class="fig" d="M42 82 L74 78 L94 60 L112 86"><animate attributeName="d" values="M42 82 L74 78 L94 60 L112 86;M42 82 L74 60 L94 56 L112 86;M42 82 L74 78 L94 60 L112 86" dur="2.8s" repeatCount="indefinite"/></path></svg>`,
@@ -1852,11 +1890,11 @@ hipthrust: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146
 squat: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="76" cy="26" r="6"><animate attributeName="cy" values="26;44;26" dur="2.8s" repeatCount="indefinite"/></circle><rect class="fill" x="70" y="38" width="10" height="10" rx="2"><animate attributeName="y" values="38;56;38" dur="2.8s" repeatCount="indefinite"/></rect><path class="fig" d="M76 34 L76 60 L92 74 L84 90 M76 60 L62 74 L70 90"><animate attributeName="d" values="M76 34 L76 60 L92 74 L84 90 M76 60 L62 74 L70 90;M76 52 L78 68 L94 74 L86 90 M78 68 L60 76 L68 90;M76 34 L76 60 L92 74 L84 90 M76 60 L62 74 L70 90" dur="2.8s" repeatCount="indefinite"/></path></svg>`,
 lunge: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="70" cy="26" r="6"><animate attributeName="cy" values="26;36;26" dur="2.8s" repeatCount="indefinite"/></circle><path class="fig" d="M70 34 L70 60 M70 60 L74 76 L70 90 M70 60 L70 76 L64 90"><animate attributeName="d" values="M70 34 L70 60 M70 60 L74 76 L70 90 M70 60 L70 76 L64 90;M70 44 L70 66 M70 66 L86 74 L84 90 M70 66 L58 82 L44 88;M70 34 L70 60 M70 60 L74 76 L70 90 M70 60 L70 76 L64 90" dur="2.8s" repeatCount="indefinite"/></path></svg>`,
 bandwalk: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><g><circle class="fill" cx="80" cy="30" r="6"/><path class="fig" d="M80 38 L80 58"/><path class="fig" d="M80 58 L68 74 L66 90 M80 58 L92 74 L94 90"><animate attributeName="d" values="M80 58 L68 74 L66 90 M80 58 L92 74 L94 90;M80 58 L58 74 L54 90 M80 58 L98 74 L102 90;M80 58 L68 74 L66 90 M80 58 L92 74 L94 90" dur="2.2s" repeatCount="indefinite"/></path><path class="band" d="M67 76 Q80 82 91 76"><animate attributeName="d" values="M67 76 Q80 82 91 76;M59 76 Q80 86 97 76;M67 76 Q80 82 91 76" dur="2.2s" repeatCount="indefinite"/></path><animateTransform attributeName="transform" type="translate" values="-12 0;12 0;-12 0" dur="4.4s" repeatCount="indefinite"/></g></svg>`,
-legpress: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M34 90 L46 58 L66 62"/><circle class="fill" cx="44" cy="46" r="6"/><path class="fig" d="M52 56 L74 66"/><path class="fig" d="M74 66 L94 52 L112 62"><animate attributeName="d" values="M74 66 L94 52 L112 62;M74 66 L100 46 L124 52;M74 66 L94 52 L112 62" dur="2.6s" repeatCount="indefinite"/></path><line class="obj" x1="116" y1="42" x2="108" y2="70"><animate attributeName="x1" values="116;128;116" dur="2.6s" repeatCount="indefinite"/><animate attributeName="x2" values="108;120;108" dur="2.6s" repeatCount="indefinite"/></line></svg>`,
-rdl: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="fig" d="M74 62 L70 76 L72 90 M74 62 L80 76 L78 90"/><g><path class="fig" d="M74 62 L76 34"/><circle class="fill" cx="77" cy="26" r="6"/><path class="fig" d="M75 44 L75 62"/><circle class="fill" cx="75" cy="66" r="4"/><animateTransform attributeName="transform" type="rotate" values="0 74 62;74 74 62;0 74 62" dur="3s" repeatCount="indefinite"/></g></svg>`,
+legpress: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M30 90 L48 54 L70 62"/><path class="obj" d="M96 22 L136 54"/><circle class="fill" cx="46" cy="42" r="6"/><path class="fig" d="M54 52 L78 64"/><g><line class="fig" x1="104" y1="34" x2="94" y2="62"/><animateTransform attributeName="transform" type="translate" values="0 0;13 -10;0 0" dur="2.6s" repeatCount="indefinite"/></g><path class="fig" d="M78 64 L92 48 L100 56"><animate attributeName="d" values="M78 64 L92 48 L100 56;M78 64 L98 42 L111 48;M78 64 L92 48 L100 56" dur="2.6s" repeatCount="indefinite"/></path></svg>`,
+rdl: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="77" cy="26" r="6"><animate attributeName="cx" values="77;106;77" dur="3s" repeatCount="indefinite"/><animate attributeName="cy" values="26;46;26" dur="3s" repeatCount="indefinite"/></circle><path class="fig" d="M76 34 L74 62 M74 62 L70 76 L72 90 M74 62 L80 76 L78 90"><animate attributeName="d" values="M76 34 L74 62 M74 62 L70 76 L72 90 M74 62 L80 76 L78 90;M100 44 L74 62 M74 62 L66 78 L70 90 M74 62 L78 78 L76 90;M76 34 L74 62 M74 62 L70 76 L72 90 M74 62 L80 76 L78 90" dur="3s" repeatCount="indefinite"/></path><path class="fig" d="M76 42 L76 60"><animate attributeName="d" values="M76 42 L76 60;M96 48 L96 68;M76 42 L76 60" dur="3s" repeatCount="indefinite"/></path><circle class="fill" cx="76" cy="64" r="4.5"><animate attributeName="cx" values="76;96;76" dur="3s" repeatCount="indefinite"/><animate attributeName="cy" values="64;72;64" dur="3s" repeatCount="indefinite"/></circle></svg>`,
 walk: `<svg viewBox="0 0 160 100"><path class="obj" d="M20 84 L140 66 M28 90 L136 74"/><g><circle class="fill" cx="78" cy="22" r="6"/><path class="fig" d="M78 30 L76 54"/><g><path class="fig" d="M76 38 L86 50"/><animateTransform attributeName="transform" type="rotate" values="26 76 38;-26 76 38;26 76 38" dur="1.6s" repeatCount="indefinite"/></g><g><path class="fig" d="M76 54 L84 70 L82 78"/><animateTransform attributeName="transform" type="rotate" values="30 76 54;-24 76 54;30 76 54" dur="1.6s" repeatCount="indefinite"/></g><g><path class="fig" d="M76 54 L70 70 L74 78"/><animateTransform attributeName="transform" type="rotate" values="-24 76 54;30 76 54;-24 76 54" dur="1.6s" repeatCount="indefinite"/></g><animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.8s" repeatCount="indefinite"/></g></svg>`,
-bike: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="obj" cx="96" cy="74" r="14"/><path class="obj" d="M96 74 L70 74 L64 60 M70 74 L74 90 M96 60 L106 46"/><circle class="fill" cx="52" cy="34" r="6"/><path class="fig" d="M64 58 L56 42 M56 44 L104 46"/><g><line class="fig" x1="96" y1="74" x2="96" y2="86"/><circle class="fill" cx="96" cy="86" r="3.5"/><animateTransform attributeName="transform" type="rotate" values="0 96 74;360 96 74" dur="1.6s" repeatCount="indefinite"/></g><path class="fig" d="M64 58 L80 70 L96 84"><animate attributeName="d" values="M64 58 L80 70 L96 84;M64 58 L84 60 L96 64;M64 58 L80 70 L96 84" dur="1.6s" repeatCount="indefinite"/></path></svg>`,
-elliptical: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M60 90 L100 90 M80 90 L80 84"/><circle class="fill" cx="74" cy="24" r="6"/><path class="fig" d="M74 32 L74 54"/><g><path class="obj" d="M96 34 L96 62"/><path class="fig" d="M74 40 L96 44"/><animateTransform attributeName="transform" type="translate" values="6 0;-8 0;6 0" dur="1.8s" repeatCount="indefinite"/></g><g><path class="fig" d="M74 54 L74 72 L86 78"/><path class="obj" d="M70 80 L94 80"/><animateTransform attributeName="transform" type="translate" values="8 -2;-10 2;8 -2" dur="1.8s" repeatCount="indefinite"/></g><g><path class="fig" d="M74 54 L68 72 L58 78"/><path class="obj" d="M46 82 L70 82"/><animateTransform attributeName="transform" type="translate" values="-10 2;8 -2;-10 2" dur="1.8s" repeatCount="indefinite"/></g></svg>`,
+bike: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="obj" cx="98" cy="72" r="13"/><path class="obj" d="M98 72 L66 72 M66 72 L66 78 M58 78 L74 78 M98 72 L104 50 L114 46"/><path class="obj" d="M66 72 L66 58 L56 56"/><circle class="fill" cx="56" cy="30" r="6"/><path class="fig" d="M62 54 L58 36 M60 42 L108 48"/><g><line class="fig" x1="98" y1="72" x2="98" y2="85"/><circle class="fill" cx="98" cy="85" r="3.5"/><animateTransform attributeName="transform" type="rotate" values="0 98 72;360 98 72" dur="1.5s" repeatCount="indefinite"/></g><path class="fig" d="M62 54 L80 66 L98 82"><animate attributeName="d" values="M62 54 L80 66 L98 82;M62 54 L84 56 L98 62;M62 54 L80 66 L98 82" dur="1.5s" repeatCount="indefinite"/></path></svg>`,
+elliptical: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M46 90 L118 90 M110 90 L110 34 M102 34 L118 34"/><circle class="fill" cx="72" cy="22" r="6"/><path class="fig" d="M72 30 L74 52"/><g><path class="obj" d="M96 28 L96 52"/><path class="fig" d="M74 36 L96 40"/><animateTransform attributeName="transform" type="translate" values="5 0;-7 0;5 0" dur="1.9s" repeatCount="indefinite"/></g><g><path class="fig" d="M74 52 L76 70 L90 76"/><path class="obj" d="M74 80 L100 80"/><animateTransform attributeName="transform" type="translate" values="7 -3;-9 3;7 -3" dur="1.9s" repeatCount="indefinite"/></g><g><path class="fig" d="M74 52 L68 70 L54 76"/><path class="obj" d="M40 80 L66 80"/><animateTransform attributeName="transform" type="translate" values="-9 3;7 -3;-9 3" dur="1.9s" repeatCount="indefinite"/></g></svg>`,
 foamroll: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><g><circle class="fill" cx="42" cy="62" r="6"/><path class="fig" d="M50 66 L88 74 M88 74 L100 58 L112 74 M52 70 L48 84"/><animateTransform attributeName="transform" type="translate" values="0 0;14 0;0 0" dur="2.4s" repeatCount="indefinite"/></g><circle class="obj" cx="78" cy="82" r="8"><animate attributeName="cx" values="78;88;78" dur="2.4s" repeatCount="indefinite"/></circle></svg>`,
 hipstretch: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><g><circle class="fill" cx="66" cy="26" r="6"/><path class="fig" d="M66 34 L68 58 M68 58 L84 68 L84 90 M68 58 L52 74 L36 88"/><animateTransform attributeName="transform" type="translate" values="0 0;9 3;0 0" dur="3s" repeatCount="indefinite"/></g></svg>`,
 catcamel: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="88" x2="146" y2="88"/><circle class="fill" cx="116" cy="52" r="6"><animate attributeName="cy" values="52;60;52" dur="3s" repeatCount="indefinite"/></circle><path class="fig" d="M98 56 L98 88 M64 56 L64 76 L78 88"/><path class="fig" d="M56 56 Q82 50 108 56"><animate attributeName="d" values="M56 56 Q82 50 108 56;M56 56 Q82 34 108 56;M56 56 Q82 50 108 56" dur="3s" repeatCount="indefinite"/></path></svg>`,
@@ -1865,7 +1903,9 @@ pulldown: `<svg viewBox="0 0 160 100"><path class="obj" d="M52 12 L108 12 M80 12
 curl: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="78" cy="24" r="6"/><path class="fig" d="M78 32 L78 60 M78 60 L72 74 L74 90 M78 60 L84 74 L82 90 M78 38 L80 52"/><g><path class="fig" d="M80 52 L84 68"/><circle class="fill" cx="85" cy="71" r="5"/><animateTransform attributeName="transform" type="rotate" values="0 80 52;-118 80 52;0 80 52" dur="2.4s" repeatCount="indefinite"/></g></svg>`,
 triceps: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><line class="band" x1="98" y1="8" x2="94" y2="38"><animate attributeName="x2" values="94;93;94" dur="2.2s" repeatCount="indefinite"/><animate attributeName="y2" values="38;55;38" dur="2.2s" repeatCount="indefinite"/></line><circle class="fill" cx="76" cy="24" r="6"/><path class="fig" d="M76 32 L76 60 M76 60 L70 74 L72 90 M76 60 L84 74 L82 90 M76 38 L86 46"/><g><path class="fig" d="M86 46 L94 38"/><animateTransform attributeName="transform" type="rotate" values="0 86 46;96 86 46;0 86 46" dur="2.2s" repeatCount="indefinite"/></g></svg>`,
 plank: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><g><circle class="fill" cx="38" cy="58" r="6"/><path class="fig" d="M46 62 L112 74 L128 88 M50 64 L50 78 L62 80"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -2.5;0 0" dur="3.2s" repeatCount="indefinite"/></g></svg>`,
-press: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M60 90 L60 46 M56 78 L96 78 M92 78 L92 90"/><circle class="fill" cx="78" cy="34" r="6"/><path class="fig" d="M78 40 L78 62 M78 62 L94 68 L94 78"/><path class="fig" d="M70 46 L62 32 M86 46 L94 32"><animate attributeName="d" values="M70 46 L62 32 M86 46 L94 32;M70 46 L66 14 M86 46 L90 14;M70 46 L62 32 M86 46 L94 32" dur="2.6s" repeatCount="indefinite"/></path><circle class="fill" cx="62" cy="29" r="4"><animate attributeName="cy" values="29;11;29" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cx" values="62;66;62" dur="2.6s" repeatCount="indefinite"/></circle><circle class="fill" cx="94" cy="29" r="4"><animate attributeName="cy" values="29;11;29" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cx" values="94;90;94" dur="2.6s" repeatCount="indefinite"/></circle></svg>`
+press: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M60 90 L60 46 M56 78 L96 78 M92 78 L92 90"/><circle class="fill" cx="78" cy="34" r="6"/><path class="fig" d="M78 40 L78 62 M78 62 L94 68 L94 78"/><path class="fig" d="M70 46 L62 32 M86 46 L94 32"><animate attributeName="d" values="M70 46 L62 32 M86 46 L94 32;M70 46 L66 14 M86 46 L90 14;M70 46 L62 32 M86 46 L94 32" dur="2.6s" repeatCount="indefinite"/></path><circle class="fill" cx="62" cy="29" r="4"><animate attributeName="cy" values="29;11;29" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cx" values="62;66;62" dur="2.6s" repeatCount="indefinite"/></circle><circle class="fill" cx="94" cy="29" r="4"><animate attributeName="cy" values="29;11;29" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cx" values="94;90;94" dur="2.6s" repeatCount="indefinite"/></circle></svg>`,
+lateral: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><circle class="fill" cx="80" cy="24" r="6"/><path class="fig" d="M80 32 L80 62 M80 62 L72 78 L72 90 M80 62 L88 78 L88 90"/><path class="fig" d="M80 40 L66 56 M80 40 L94 56"><animate attributeName="d" values="M80 40 L66 56 M80 40 L94 56;M80 40 L54 40 M80 40 L106 40;M80 40 L66 56 M80 40 L94 56" dur="2.6s" repeatCount="indefinite"/></path><circle class="fill" cx="66" cy="58" r="4"><animate attributeName="cx" values="66;52;66" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cy" values="58;40;58" dur="2.6s" repeatCount="indefinite"/></circle><circle class="fill" cx="94" cy="58" r="4"><animate attributeName="cx" values="94;108;94" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cy" values="58;40;58" dur="2.6s" repeatCount="indefinite"/></circle></svg>`,
+pushup: `<svg viewBox="0 0 160 100"><line class="obj" x1="14" y1="90" x2="146" y2="90"/><path class="obj" d="M38 62 L62 62 M42 62 L42 90 M58 62 L58 90"/><circle class="fill" cx="48" cy="42" r="6"><animate attributeName="cx" values="48;54;48" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cy" values="42;52;42" dur="2.6s" repeatCount="indefinite"/></circle><path class="fig" d="M132 88 L60 48"><animate attributeName="d" values="M132 88 L60 48;M132 88 L66 58;M132 88 L60 48" dur="2.6s" repeatCount="indefinite"/></path><path class="fig" d="M60 48 L50 62"><animate attributeName="d" values="M60 48 L50 62;M66 58 L50 62;M60 48 L50 62" dur="2.6s" repeatCount="indefinite"/></path></svg>`
 };
 
 // ════════════════════════════════════════════════════════════

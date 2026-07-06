@@ -32,18 +32,19 @@
 | 📊 Histórico | `sec-historico` | Últimas 4 semanas, pesos usados, exercícios feitos |
 | 💡 Dicas | `sec-dicas` | Guia pós-parto, nutrição, alertas de segurança |
 
-### Tipos de dia de treino (PLAN_TYPES) — v2: fase 6m+, 6 exercícios/dia
-- **Dia A** — Core & Assoalho Pélvico (+ Pallof press; progressões com pausa/carga leve) · met 3.0
-- **Dia B** — Glúteos & Pernas (+ Stiff/RDL; progressão de carga explícita nos details) · met 5.0
-- **Dia C** — Cardio & Mobilidade (+ gato-camelo; intervalos leves na esteira) · met 6.0
-- **Dia D** — Parte Superior Leve (+ desenvolvimento de ombros sentada) · met 4.0
+### Tipos de dia de treino (PLAN_TYPES) — v2.1: fase 6m+, mais braço
+- **Dia A** — Core, Pélvico & Braços (8 ex: core diastasia-safe + rosca e elevação lateral leves) · met 3.2
+- **Dia B** — Glúteos & Pernas (6 ex, com Stiff/RDL) · met 5.0
+- **Dia C** — Cardio & Mobilidade (6 ex — só no plano de 4 dias) · met 6.0
+- **Dia D** — Braços & Ombros (8 ex: remada, pulldown, rosca, tríceps, prancha, desenvolvimento, flexão inclinada, elevação lateral) · met 4.0
 
-**Regra de compatibilidade:** os 5 exercícios originais de cada dia mantêm ordem e (quase todos) o nome — o 6º foi APENAS acrescentado no fim. Isto preserva `checks` (por índice) e `pesos` (por nome). `migratePlanData()` atualiza o planData guardado no arranque.
+**Regra de compatibilidade:** exercícios existentes mantêm ordem e nome — novos são APENAS acrescentados no fim. Isto preserva `checks` (por índice) e `pesos` (por nome). `migratePlanData()` atualiza o planData no arranque; `planVer` (localStorage, atual = 3) força rebuild da divisão quando a sequência muda.
 
-### Sequências por dias/semana
+### Sequências por dias/semana (v2.1 — braços entram nos 3 dias)
 ```js
-DAY_SEQUENCES = { 2: ["A","B"], 3: ["A","B","C"], 4: ["A","B","C","D"] }
+DAY_SEQUENCES = { 2: ["A","B"], 3: ["A","B","D"], 4: ["A","B","D","C"] }
 ```
+Feedback da Andressa (jul/2026): faltava treino de braço → Dia D (Braços & Ombros) substituiu o C no plano de 3 dias; cardio dedicado só com 4 dias (aquecimento cobre o resto).
 
 ### Estado guardado em localStorage
 ```js
@@ -55,6 +56,7 @@ dayDone     = { "YYYY-MM-DD": true }         // dias concluídos
 weightsHist = { "exName": [{date, weight}] } // histórico de pesos (alimenta o gráfico)
 kcalLog     = { "YYYY-MM-DD": 262 }          // v2: kcal estimadas por treino concluído
 badges      = { "badgeId": "YYYY-MM-DD" }    // v2: conquistas + data
+planVer     = 3                              // v2.1: versão da divisão (rebuild automático se menor)
 ```
 
 ### Cada exercício tem
