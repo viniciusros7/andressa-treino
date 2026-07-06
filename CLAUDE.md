@@ -103,7 +103,7 @@ planVer     = 3                              // v2.1: versão da divisão (rebui
 - [ ] **Partilha de conquistas** — imagem de streak partilhável (canvas API)
 - [ ] **Modo escuro** — toggle entre light/dark usando as variáveis CSS existentes
 - [ ] **Sons de motivação** — áudio curto ao marcar treino como concluído (beep do timer já existe)
-- [ ] **ytId verificados** — os 4 exercícios novos usam `ytQ` (pesquisa); substituir por `ytId` reais após confirmar bons vídeos
+- [x] **ytId verificados** — todos os 26 exercícios têm `ytId` validado via oEmbed (jul/2026); 12 IDs antigos estavam mortos (404) e foram substituídos. Se um vídeo "morrer" no futuro, o campo `ytQ` continua suportado como fallback (abre pesquisa do YouTube)
 
 ---
 
